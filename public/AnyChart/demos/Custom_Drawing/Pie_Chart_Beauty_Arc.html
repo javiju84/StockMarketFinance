@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Pie Chart Beauty Arc</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         var path, palette;
+anychart.onDocumentReady(function () {
+    // create stage
+    stage = anychart.graphics.create('container');
+
+    // creating pie chart
+    chart = anychart.pie([2, 4, 3, 6]);
+
+    // set container
+    chart.container(stage);
+
+    // configure chart.
+    chart.legend(false);
+    chart.tooltip(false);
+    chart.labels(false);
+
+    // add events listener for custom drawing.
+    chart.listen('pointshover', function (e) {
+        drawArc(e.point)
+    });
+    chart.listen('pointsselect', function (e) {
+        drawArc(e.point);
+    });
+    chart.draw();
+
+    // path of the acr
+    path = stage.path().stroke(null);
+
+    // chart palette. Need to make the arc colorized same as the point it belongs to.
+    palette = chart.palette();
+});
+// helper function to draw a beauty arc
+function drawArc(point) {
+    path.clear();
+
+    // return if we unhover point
+    if (!point.hovered()) return true;
+
+    // set fill for path
+    var fill = palette.colorAt(point.getIndex());
+    // opacity of the outer arc
+    path.fill(anychart.color.setOpacity(fill, 1, true));
+
+    // some props to draw outer arc
+    var start = point.getStartAngle();
+    var sweep = point.getEndAngle() - start;
+    var radius = chart.getPixelRadius();
+    var explodeValue = chart.getPixelExplode();
+    var exploded = point.exploded();
+
+    var cx = chart.getCenterPoint().x;
+    var cy = chart.getCenterPoint().y;
+
+    // distance between pie and outer arc
+    var innerR = radius + 3;
+    // width (thickness) of outer arc
+    var outerR = innerR + 5;
+
+    var ex = 0;
+    var ey = 0;
+
+    if (exploded) {
+        var angle = start + sweep / 2;
+        var cos = Math.cos(toRadians(angle));
+        var sin = Math.sin(toRadians(angle));
+        ex = explodeValue * cos;
+        ey = explodeValue * sin;
+    }
+    acgraph.vector.primitives.donut(path, cx + ex, cy + ey, outerR, innerR, start, sweep);
+}
+
+// helper function to convert degrees to radians
+function toRadians(angleDegrees) {
+    return angleDegrees * Math.PI / 180;
+}
+    
+        </script>
+    </body>
+</html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Range Column Chart</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+  // create column chart
+  chart = anychart.column();
+
+  // set container id for the chart
+  chart.container('container');
+
+  // set chart title text settings
+  chart.title('Coastal Water Temperature \nin London vs Edinburgh in 2015 (°C)');
+
+  // create area series with passed data
+  var ranges_data_lon = anychart.data.set([
+    {low: 5.8, high: 7.9, month: 'Jan'},
+    {low: 4.6, high: 6.1, month: 'Feb'},
+    {low: 5.9, high: 8.1, month: 'Mar'},
+    {low: 7.8, high: 10.7, month: 'Apr'},
+    {low: 10.5, high: 13.7, month: 'May'},
+    {low: 13.8, high: 17, month: 'June'},
+    {low: 16.5, high: 18.5, month: 'July'},
+    {low: 17.8, high: 19, month: 'Aug'},
+    {low: 15.4, high: 17.8, month: 'Sep'},
+    {low: 12.7, high: 15.3, month: 'Oct'},
+    {low: 9.8, high: 13, month: 'Nov'},
+    {low: 9, high: 10.1, month: 'Dec'}
+]);
+
+// create area series with passed data
+  var ranges_data_edi = anychart.data.set([
+    {low: 6.2, high: 7.4, month: 'Jan'},
+    {low: 4.6, high: 6.1, month: 'Feb'},
+    {low: 4.9, high: 6.3, month: 'Mar'},
+    {low: 6.0, high: 9.5, month: 'Apr'},
+    {low: 8.5, high: 10.2, month: 'May'},
+    {low: 9.7, high: 13.5, month: 'June'},
+    {low: 12.7, high: 14.3, month: 'July'},
+    {low: 12.9, high: 14.1, month: 'Aug'},
+    {low: 12.2, high: 13.1, month: 'Sep'},
+    {low: 11.3, high: 12.7, month: 'Oct'},
+    {low: 8.4, high: 12.1, month: 'Nov'},
+    {low: 7.4, high: 8.6, month: 'Dec'}
+]);
+
+    var data_lon = ranges_data_lon.mapAs(null, {x: ['month']});
+    var series_lon = chart.rangeColumn(data_lon);
+    series_lon.name("London");
+
+    var data_edi = ranges_data_edi.mapAs(null, {x: ['month']});
+    var series_edi = chart.rangeColumn(data_edi);
+    series_edi.name("Edinburgh");
+
+    // set the max and min values on the axes
+    var yScale = chart.yScale();
+    yScale.minimum(4);
+    yScale.maximum(20);
+    
+    // enable legend
+    chart.legend(true);
+    
+    // enable the grid
+    chart.grid(true);
+    chart.minorGrid(true);
+    
+    // initiate chart drawing
+  chart.draw();
+});
+        </script>
+    </body>
+</html>

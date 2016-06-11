@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Single-Series 3D Area Chart</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+  // create data set on our data
+  var dataSet = anychart.data.set([
+    ['2015/9/1', 10],
+    ['2015/9/2', 12],
+    ['2015/9/3', 11],
+    ['2015/9/4', 15],
+    ['2015/9/5', 20],
+    ['2015/9/6', 22],
+    ['2015/9/7', 21],
+    ['2015/9/8', 25],
+    ['2015/9/9', 31],
+    ['2015/9/10', 32],
+    ['2015/9/11', 28],
+    ['2015/9/12', 29],
+    ['2015/9/13', 40],
+    ['2015/9/14', 41],
+    ['2015/9/15', 45],
+    ['2015/9/16', 50],
+    ['2015/9/17', 65],
+    ['2015/9/18', 45],
+    ['2015/9/19', 50],
+    ['2015/9/20', 51],
+    ['2015/9/21', 65],
+    ['2015/9/22', 60],
+    ['2015/9/23', 62],
+    ['2015/9/24', 65],
+    ['2015/9/25', 45],
+    ['2015/9/26', 55],
+    ['2015/9/27', 59],
+    ['2015/9/28', 52],
+    ['2015/9/29', 53],
+    ['2015/9/30', 40],
+    ['2015/9/31', 45]
+  ]);
+
+  // map data for the first series, take x from the zero column and value from the first column of data set
+  var seriesData = dataSet.mapAs({x: [0], value: [1]});
+
+ // create line chart
+  chart = anychart.area3d();
+
+  // adding dollar symbols to yAxis labels
+  chart.yAxis().labels().textFormatter(function(){
+    return '$' + this.value
+  });
+
+  // set container id for the chart
+  chart.container('container');
+
+  // turn on chart animation
+  chart.animation(true);
+
+  // set chat axes settings
+  chart.yAxis().title('The Share Price');
+  chart.xAxis().title('Year/Month/Day');
+  chart.xAxis().labels().padding([5,5,0,5]);
+
+  // set chart title text settings
+  chart.title('The cost of ACME\'s shares<br/>' +
+  '<span style="color:#212121; font-size: 13px;">Statistics was collected from site N during September</span>');
+  chart.title().useHtml(true).padding([0,0,20,0]);
+
+  // create first series with mapped data
+  var series = chart.area(seriesData);
+  series.name("ACME Share Price").hoverMarkers().enabled(true).type('circle').size(4);
+
+  // set chart tooltip settings
+  chart.tooltip().position('top').anchor('bottomLeft').offsetX(5).offsetY(5);
+  chart.tooltip().positionMode('point');
+  chart.interactivity().hoverMode('byX');
+
+  chart.grid();
+  chart.grid(1).layout('vertical');
+
+  // initiate chart drawing
+  chart.draw();
+});
+        </script>
+    </body>
+</html>

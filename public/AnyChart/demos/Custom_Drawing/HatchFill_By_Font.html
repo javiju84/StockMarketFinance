@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+        
+        <script src="http://static.anychart.com/js/fontLoad.js"></script>
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>HatchFill By Font</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         
+var head = document.getElementsByTagName('head')[0];
+var style = document.createElement('link');
+style.href = "//cdn.anychart.com/fonts/interdex.css";
+style.rel="stylesheet";
+head.appendChild(style);
+
+anychart.onDocumentLoad(function() {
+    // set stage
+    stage = anychart.graphics.create('container');
+
+    // chart type
+    chart = anychart.columnChart();
+    chart.background(true);
+    // set title
+    chart.title().text('Multi-series Column Chart');
+
+    // set axes titles
+    chart.xAxis().title().text('Manager');
+    chart.yAxis().title().text('Sales');
+
+    // set scale minimum
+    chart.yScale().minimum(0);
+
+    var data = anychart.data.set([
+        ['John' , 10000, 12000, 5000],
+        ['Jake' , 12000, 15000, 6000],
+        ['Peter' , 18000, 16000, 7000],
+        ['James' , 11000, 13000, 6000],
+        ['Mary' , 9000, 19000, 5000]
+    ]);
+
+    // map data for the each series
+    var Sales2003 = data.mapAs({x: [0], value: [1]});
+    var Sales2004 = data.mapAs({x: [0], value: [2]});
+    var Sales2005 = data.mapAs({x: [0], value: [3]});
+
+    // set series data
+    series1 = chart.column(Sales2003);
+    series1.fill(getPattern('B',30)).stroke('#212121');
+
+    series2 = chart.column(Sales2004);
+    series2.fill(getPattern('Y',30)).stroke('#212121');
+
+    series3 = chart.column(Sales2005);
+    series3.fill(getPattern('C',30)).stroke('#212121');
+
+
+    // set container and draw chart
+    chart.container(stage);
+    chart.draw();
+});
+
+// helper function to get the pattern
+function getPattern(letter,size){
+    var text = anychart.graphics.text().htmlText('<span style=\'font-family:Conv_interdex;font-size:' + size + ';\'>' + letter + '</span>');
+    var pattern = stage.pattern(text.getBounds());
+    pattern.addChild(text);
+    return pattern;
+}
+    
+        </script>
+    </body>
+</html>

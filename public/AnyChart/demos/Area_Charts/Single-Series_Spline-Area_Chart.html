@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Single-Series Spline-Area Chart</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+  // create data set on our data
+  var dataSet = anychart.data.set([
+    ['Jan', 225],
+    ['Feb', 200],
+    ['Mar', 205],
+    ['Apr', 190],
+    ['May', 180],
+    ['Jun', 185],
+    ['Jul', 195],
+    ['Aug', 230],
+    ['Sep', 227],
+    ['Oct', 232],
+    ['Nov', 228],
+    ['Dec', 235]
+  ]);
+
+  // map data for the first series, take x from the zero column and value from the first column of data set
+  var seriesData = dataSet.mapAs({x: [0], value: [1]});
+
+ // create line chart
+  chart = anychart.area();
+
+  // adding dollar symbols to yAxis labels
+  chart.yAxis().labels().textFormatter("{%Value} hrs");
+
+  // turn on chart animation
+  chart.animation(true);
+  
+  // axes and scale settings
+  chart.yScale().minimum(150).maximum(300);
+  chart.yAxis().title('Sunhours');
+  chart.xAxis().title(false);
+  chart.xAxis().labels().padding([5,5,0,5]);
+
+  // chart grids
+  chart.grid(0).enabled(true);
+  chart.grid(1).enabled(true);
+  chart.grid(1).layout("vertical");
+
+  // turn on the crosshair
+  chart.crosshair().enabled(true).yLabel().enabled(false);
+  chart.crosshair().yStroke(null).xStroke('#fff').zIndex(99);
+  chart.crosshair().xLabel(false);
+
+  // set chart title text settings
+  chart.title('AVERAGE MONTHLY HOURS OF SUNSHINE OVER THE YEAR<br/>' +
+  '<span style="color:#212121; font-size: 13px;">the monthly total of sunhours over the year in Sydney, Australia.</span>');
+  chart.title().useHtml(true).padding([0,0,20,0]);
+
+  // create first series with mapped data
+  var series = chart.splineArea(seriesData);
+  series.name("Sunhours");
+  series.color("Gold 0.5");
+  series.markers().enabled(true).type('circle').size(4).stroke('1.5 #fff');
+  series.markers().zIndex(100);
+
+  // set chart tooltip and interactivity settings
+  chart.tooltip().positionMode("chart");
+  chart.tooltip().anchor("topRight");
+  chart.tooltip().position("topRight");
+  chart.tooltip().offsetX(50).offsetY(50);
+  chart.interactivity().hoverMode('byX');
+
+  // set container id for the chart
+  chart.container('container');
+
+  // initiate chart drawing
+  chart.draw();
+});
+        </script>
+    </body>
+</html>

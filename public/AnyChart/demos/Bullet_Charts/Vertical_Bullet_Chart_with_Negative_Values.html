@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Vertical Bullet Chart with Negative Values</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         
+anychart.onDocumentReady(function () {
+  var dataSet = {
+    'A': {
+      actual: 760,
+      norm: 900,
+      name: 'Retinol'
+    },
+    'B1': {
+      actual: 1.25,
+      norm: 1.2,
+      name: 'Thiamine'
+    },
+    'B2': {
+      actual: 1.32,
+      norm: 1.3,
+      name: 'Riboflavin'
+    },
+    'B3': {
+      actual: 15,
+      norm: 16,
+      name: 'Niacin'
+    },
+    'B5': {
+      actual: 5.9,
+      norm: 5.0,
+      name: 'Pantothenic acid'
+    },
+    'B6': {
+      actual: 1.6,
+      norm: 1.4,
+      name: 'Pyridoxine'
+    },
+    'B7': {
+      actual: 34,
+      norm: 30,
+      name: 'Biotin'
+    },
+    'B9': {
+      actual: 340,
+      norm: 400,
+      name: 'Folic acid'
+    },
+    'B12': {
+      actual: 2.9,
+      norm: 2.4,
+      name: 'Cyanocobalamin'
+    },
+    'C': {
+      actual: 93,
+      norm: 90,
+      name: 'Ascorbic acid'
+    },
+    'D': {
+      actual: 9.8,
+      norm: 10,
+      name: 'Cholecalciferol'
+    },
+    'E': {
+      actual: 12,
+      norm: 15,
+      name: 'Tocopherols'
+    },
+    'K': {
+      actual: 121,
+      norm: 120,
+      name: 'Phylloquinone'
+    }
+  };
+
+
+  function createBulletScale(){
+    var axis = anychart.axes.linear();
+    axis.title(null);
+    var scale = anychart.scales.linear();
+    scale.minimum(-30).maximum(30).ticks().interval(15);
+    axis.scale(scale);
+    axis.orientation('bottom');
+    axis.stroke('#CECECE');
+    axis.ticks().stroke('#CECECE').length(4);
+    axis.labels().useHtml(true).padding(0,3,0,10)
+.textFormatter(function () {
+return this.value + '%'
+    });
+    axis.minorTicks(null);
+    return axis
+  }
+
+  function createBulletChart(name){
+    var data = dataSet[name];
+    var target = data['norm'];
+    var actual = data['actual'];
+    var diff = 100 - Math.round(target * 100 / actual);
+    var bullet = anychart.bullet([
+      {value: diff, type: 'bar', gap: 0.7, fill: '#64b5f6', stroke: null},
+      {value: 0, 'type': 'line', 'gap': 0.2, fill: '#545f69',
+  stroke: {thickness:2, color: '#545f69'}
+      }
+    ]);
+    bullet.scale().minimum(-25);
+    bullet.scale().maximum(25);
+    bullet.background().enabled(true).fill('white').stroke('1 #e5e4e4');
+    bullet.layout('vertical');
+    bullet.axis(null);
+    bullet.title(false);
+    bullet.padding(0, -1);
+    return bullet;
+  }
+
+  table = anychart.ui.table();
+  table.hAlign('center');
+
+  table.contents([
+    [null],
+    [null],
+    [
+      null,
+      createBulletChart('A'),
+      createBulletChart('B1'),
+      createBulletChart('B2'),
+      createBulletChart('B3'),
+      createBulletChart('B5'),
+      createBulletChart('B6'),
+      createBulletChart('B7'),
+      createBulletChart('B9'),
+      createBulletChart('B12'),
+      createBulletChart('C'),
+      createBulletChart('D'),
+      createBulletChart('E'),
+      createBulletChart('K'),
+      null
+    ], [
+      null,
+      'A',
+      'B1',
+      'B2',
+      'B3',
+      'B5',
+      'B6',
+      'B7',
+      'B9',
+      'B12',
+      'C',
+      'D',
+      'E',
+      'K',
+      null
+    ],
+    [null]
+  ]);
+  table.getRow(0).height(20);
+  table.getRow(1).height(80).cellPadding(10, 0, 20, 0);
+  table.getRow(3).height(30);
+  table.getRow(2).cellPadding(10, 10, 10, 10);
+  table.getRow(4).height(20);
+  table.getCell(1,1).colSpan(13).useHtml(true)
+  .content('The Content of Vitamins of Corporate Dinners. ACME corp. <br/>' +
+  '<span  style="color:#929292; font-size: 13px;">(Variance from Norm)</span>')
+  .fontSize(15)
+  .vAlign('bottom');
+  table.cellBorder(null);
+
+  table.container('container');
+  table.vAlign('middle');
+  table.draw();
+});
+        </script>
+    </body>
+</html>

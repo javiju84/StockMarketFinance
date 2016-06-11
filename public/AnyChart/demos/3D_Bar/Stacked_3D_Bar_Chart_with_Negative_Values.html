@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Stacked 3D Bar Chart with Negative Values</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+  // create data set on our data
+  var dataSet = anychart.data.set([
+    ['Nail polish' ,  5376, -4229],
+    ['Eyebrow pencil' , 10987, -3932],
+    ['Rouge' , 7624, -5221],
+    ['Pomade' , 8814, -9256],
+    ['Eyeshadows' , 8998,  -13308],
+    ['Eyeliner' , 9321, -10432],
+    ['Foundation' , 8342,  -13701],
+    ['Lip gloss' , 6998, -9008],
+    ['Mascara' , 9261, -8712],
+    ['Shampoo' ,  5376, -9229],
+    ['Hair conditioner' , 10987, -13932],
+    ['Body lotion' , 7624, -10221],
+    ['Shower gel' , 8814, -12256],
+    ['Soap' , 8998,  -5308],
+    ['Eye fresher' , 9321, -9432],
+    ['Deodorant' , 8342,  -11701],
+    ['Hand cream' , 7598, -5808],
+    ['Foot cream' , 6098, -3987],
+    ['Night cream' , 6998, -8847],
+    ['Day cream' , 5304, -4008],
+    ['Vanila cream' , 9261, -8712]
+  ]);
+
+  // map data for the first series, take x from the zero column and value from the first column of data set
+  var seriesData_1 = dataSet.mapAs({x: [0], value: [1]});
+
+  // map data for the second series, take x from the zero column and value from the second column of data set
+  var seriesData_2 = dataSet.mapAs({x: [0], value: [2]});
+
+  // create bar chart
+  chart = anychart.bar3d();
+
+  // set container id for the chart
+  chart.container('container');
+
+  chart.padding([10,20,5,20]);
+
+  // force chart to stack values by Y scale.
+  chart.yScale().stackMode('value');
+
+  chart.yAxis().labels().textFormatter(function(){
+    return Math.abs(this.value).toLocaleString();
+  });
+
+  // set titles for Y-axis
+  chart.yAxis().title('Revenue in Dollars');
+
+  // turn on exstra axis for simmetry
+  chart.xAxis(1).enabled(true);
+  chart.xAxis(1).orientation('right');
+
+  // set chart title text settings
+  chart.title('Cosmetic Sales by Buyer\'s Gender');
+
+  // helper function to setup label settings for all series
+  var setupSeriesLabels = function(series, name) {
+    series.name(name);
+    series.tooltip().titleFormatter(function () {
+      return this.x;
+    });
+    series.tooltip().title(false);
+    series.tooltip().separator(false);
+    series.tooltip().useHtml(true).fontSize(12);
+    series.tooltip().textFormatter(function () {
+      return '<span style="color: #D9D9D9">$</span>' + Math.abs(this.value).toLocaleString();
+    });
+  };
+
+  chart.interactivity().hoverMode('byX');
+  chart.tooltip().displayMode('separated');
+  chart.tooltip().positionMode('point');
+
+  // temp variable to store series instance
+  var series;
+
+  // create first series with mapped data
+  series = chart.bar(seriesData_1);
+  series.tooltip().position('right').anchor('left').offsetX(5).offsetY(0);
+  setupSeriesLabels(series, 'Female');
+
+  // create second series with mapped data
+  series = chart.bar(seriesData_2);
+  series.tooltip().position('left').anchor('right').offsetX(5).offsetY(0);
+  setupSeriesLabels(series, 'Male');
+
+  // turn on legend
+  chart.legend().enabled(true).inverted(true).fontSize(13).padding([0,0,20,0]);
+
+  chart.grid();
+  chart.grid(1).layout('horizontal');
+
+  chart.zAspect('100%');
+
+  // initiate chart drawing
+  chart.draw();
+});
+
+        </script>
+    </body>
+</html>

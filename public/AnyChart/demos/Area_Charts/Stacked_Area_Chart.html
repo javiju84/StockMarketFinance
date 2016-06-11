@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Stacked Area Chart</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+// create data set 
+  var dataSet = anychart.data.set([
+    ['Q2 2014', 17.982, 10.941, 9.835, 4.047, 2.841],
+    ['Q3 2014', 17.574, 8.659, 6.230, 2.627, 2.242],
+    ['Q4 2014', 19.75, 10.35, 6.292, 3.595, 2.136],
+    ['Q1 2015', 30.6, 17.2, 16.1, 5.4, 5.2],
+    ['Q2 2015', 21.316, 12.204, 16.823, 3.457, 4.210],
+    ['Q3 2015', 20.209, 10.342, 13.23, 2.872, 2.959],
+    ['Q4 2015', 21.773, 10.577, 12.518, 3.929, 2.704],
+    ['Q1 2016', 29.3, 17.9, 18.4, 4.8, 5.4],
+  ]);
+
+  // map data for the first series, take x from the zero area and value from the first area of data set
+  var seriesData_1 = dataSet.mapAs({x: [0], value: [1]});
+
+  // map data for the second series, take x from the zero area and value from the second area of data set
+  var seriesData_2 = dataSet.mapAs({x: [0], value: [2]});
+
+  // map data for the second series, take x from the zero area and value from the third area of data set
+  var seriesData_3 = dataSet.mapAs({x: [0], value: [3]});
+
+  // map data for the fourth series, take x from the zero area and value from the fourth area of data set
+  var seriesData_4 = dataSet.mapAs({x: [0], value: [4]});
+
+  // map data for the fifth series, take x from the zero area and value from the fourth area of data set
+  var seriesData_5 = dataSet.mapAs({x: [0], value: [5]});
+
+  // create bar chart
+  chart = anychart.area();
+
+  // turn on chart animation
+  chart.animation(true);
+
+  // turn on the crosshair
+  chart.crosshair().enabled(true).yLabel().enabled(false);
+  chart.crosshair().yStroke(null).xStroke('#fff').zIndex(39);
+      
+  // force chart to stack values by Y scale.
+  chart.yScale().stackMode('value');
+
+  // set chart title text settings
+  chart.title('Unaudited Apple Inc. Revenue by Operating Segments');
+  chart.title().padding([0,0,5,0]);
+
+  // helper function to setup label settings for all series
+  var setupSeriesLabels = function(series, name) {
+    series.stroke('3 #fff 1');
+    series.fill(function(){return this.sourceColor + ' 0.8'});
+    series.name(name);
+    series.hoverMarkers().enabled(true).type('circle').size(4).stroke('1.5 #fff');
+    series.clip(false);
+    series.hoverStroke('3 #fff 1');
+    series.tooltip().valuePrefix('$');
+    series.tooltip().valuePostfix(' bln.');
+
+    series.markers().zIndex(100);
+  };
+
+  // temp variable to store series instance
+  var series;
+
+  // create first series with mapped data
+  series = chart.area(seriesData_1);
+  setupSeriesLabels(series, 'Americas');
+
+  // create second series with mapped data
+  series = chart.area(seriesData_2);
+  setupSeriesLabels(series, 'Europe');
+
+  // create third series with mapped data
+  series = chart.area(seriesData_3);
+  setupSeriesLabels(series, 'Greater China');
+
+  // create fourth series with mapped data
+  series = chart.area(seriesData_4);
+  setupSeriesLabels(series, 'Japan');
+
+  // create fourth series with mapped data
+  series = chart.area(seriesData_5);
+  setupSeriesLabels(series, 'Rest of Asia Pacific');
+
+  // turn on legend
+  chart.legend().enabled(true).fontSize(13).padding([0,0,20,0]);
+
+  // set titles for axises
+  chart.xAxis().title(false);
+  chart.yAxis().title('Revenue (in Billons USD)');
+
+  // interactivity and tooltip settings
+  chart.interactivity().hoverMode('byX');
+  chart.tooltip().displayMode('union');
+  
+  // set container id for the chart
+  chart.container('container');
+
+  // initiate chart drawing
+  chart.draw();
+});
+        </script>
+    </body>
+</html>

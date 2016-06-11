@@ -1,0 +1,278 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Heat Map in Poker</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+
+  // create Heat Map Chart
+  chart = anychart.heatMap([
+    {x: "A", y: "A",  heat: 0.85, symbol: ''},
+    {x: "K", y: "A",  heat: 0.65, symbol: 'u'},
+    {x: "Q", y: "A",  heat: 0.64, symbol: 'u'},
+    {x: "J", y: "A",  heat: 0.64, symbol: 'u'},
+    {x: "T", y: "A",  heat: 0.63, symbol: 'u'},
+    {x: "9", y: "A",  heat: 0.61, symbol: 'u'},
+    {x: "8", y: "A",  heat: 0.60, symbol: 'u'},
+    {x: "7", y: "A",  heat: 0.59, symbol: 'u'},
+    {x: "6", y: "A",  heat: 0.58, symbol: 'u'},
+    {x: "5", y: "A",  heat: 0.58, symbol: 'u'},
+    {x: "4", y: "A",  heat: 0.57, symbol: 'u'},
+    {x: "3", y: "A",  heat: 0.56, symbol: 'u'},
+    {x: "2", y: "A",  heat: 0.55, symbol: 'u'},
+
+    {x: "A", y: "K",  heat: 0.76, symbol: 's'},
+    {x: "K", y: "K",  heat: 0.82, symbol: ''},
+    {x: "Q", y: "K",  heat: 0.61, symbol: 'u'},
+    {x: "J", y: "K",  heat: 0.61, symbol: 'u'},
+    {x: "T", y: "K",  heat: 0.59, symbol: 'u'},
+    {x: "9", y: "K",  heat: 0.58, symbol: 'u'},
+    {x: "8", y: "K",  heat: 0.56, symbol: 'u'},
+    {x: "7", y: "K",  heat: 0.55, symbol: 'u'},
+    {x: "6", y: "K",  heat: 0.54, symbol: 'u'},
+    {x: "5", y: "K",  heat: 0.53, symbol: 'u'},
+    {x: "4", y: "K",  heat: 0.52, symbol: 'u'},
+    {x: "3", y: "K",  heat: 0.51, symbol: 'u'},
+    {x: "2", y: "K",  heat: 0.51, symbol: 'u'},
+
+    {x: "A", y: "Q",  heat: 0.66, symbol: 's'},
+    {x: "K", y: "Q",  heat: 0.63, symbol: 's'},
+    {x: "Q", y: "Q",  heat: 0.80, symbol: ''},
+    {x: "J", y: "Q",  heat: 0.58, symbol: 'u'},
+    {x: "T", y: "Q",  heat: 0.57, symbol: 'u'},
+    {x: "9", y: "Q",  heat: 0.55, symbol: 'u'},
+    {x: "8", y: "Q",  heat: 0.54, symbol: 'u'},
+    {x: "7", y: "Q",  heat: 0.52, symbol: 'u'},
+    {x: "6", y: "Q",  heat: 0.51, symbol: 'u'},
+    {x: "5", y: "Q",  heat: 0.50, symbol: 'u'},
+    {x: "4", y: "Q",  heat: 0.49, symbol: 'u'},
+    {x: "3", y: "Q",  heat: 0.48, symbol: 'u'},
+    {x: "2", y: "Q",  heat: 0.47, symbol: 'u'},
+
+    {x: "A", y: "J",  heat: 0.65, symbol: 's'},
+    {x: "K", y: "J",  heat: 0.63, symbol: 's'},
+    {x: "Q", y: "J",  heat: 0.60, symbol: 's'},
+    {x: "J", y: "J",  heat: 0.77, symbol: ''},
+    {x: "T", y: "J",  heat: 0.55, symbol: 'u'},
+    {x: "9", y: "J",  heat: 0.53, symbol: 'u'},
+    {x: "8", y: "J",  heat: 0.51, symbol: 'u'},
+    {x: "7", y: "J",  heat: 0.50, symbol: 'u'},
+    {x: "6", y: "J",  heat: 0.48, symbol: 'u'},
+    {x: "5", y: "J",  heat: 0.47, symbol: 'u'},
+    {x: "4", y: "J",  heat: 0.46, symbol: 'u'},
+    {x: "3", y: "J",  heat: 0.45, symbol: 'u'},
+    {x: "2", y: "J",  heat: 0.44, symbol: 'u'},
+
+    {x: "A", y: "T",  heat: 0.65, symbol: 's'},
+    {x: "K", y: "T",  heat: 0.62, symbol: 's'},
+    {x: "Q", y: "T",  heat: 0.59, symbol: 's'},
+    {x: "J", y: "T",  heat: 0.58, symbol: 's'},
+    {x: "T", y: "T",  heat: 0.75, symbol: ''},
+    {x: "9", y: "T",  heat: 0.52, symbol: 'u'},
+    {x: "8", y: "T",  heat: 0.50, symbol: 'u'},
+    {x: "7", y: "T",  heat: 0.48, symbol: 'u'},
+    {x: "6", y: "T",  heat: 0.46, symbol: 'u'},
+    {x: "5", y: "T",  heat: 0.44, symbol: 'u'},
+    {x: "4", y: "T",  heat: 0.44, symbol: 'u'},
+    {x: "3", y: "T",  heat: 0.43, symbol: 'u'},
+    {x: "2", y: "T",  heat: 0.42, symbol: 'u'},
+
+    {x: "A", y: "9",  heat: 0.63, symbol: 's'},
+    {x: "K", y: "9",  heat: 0.60, symbol: 's'},
+    {x: "Q", y: "9",  heat: 0.58, symbol: 's'},
+    {x: "J", y: "9",  heat: 0.56, symbol: 's'},
+    {x: "T", y: "9",  heat: 0.54, symbol: 's'},
+    {x: "9", y: "9",  heat: 0.72, symbol: ''},
+    {x: "8", y: "9",  heat: 0.48, symbol: 'u'},
+    {x: "7", y: "9",  heat: 0.46, symbol: 'u'},
+    {x: "6", y: "9",  heat: 0.44, symbol: 'u'},
+    {x: "5", y: "9",  heat: 0.43, symbol: 'u'},
+    {x: "4", y: "9",  heat: 0.41, symbol: 'u'},
+    {x: "3", y: "9",  heat: 0.40, symbol: 'u'},
+    {x: "2", y: "9",  heat: 0.39, symbol: 'u'},
+
+    {x: "A", y: "8",  heat: 0.62, symbol: 's'},
+    {x: "K", y: "8",  heat: 0.58, symbol: 's'},
+    {x: "Q", y: "8",  heat: 0.56, symbol: 's'},
+    {x: "J", y: "8",  heat: 0.54, symbol: 's'},
+    {x: "T", y: "8",  heat: 0.52, symbol: 's'},
+    {x: "9", y: "8",  heat: 0.51, symbol: 's'},
+    {x: "8", y: "8",  heat: 0.69, symbol: ''},
+    {x: "7", y: "8",  heat: 0.45, symbol: 'u'},
+    {x: "6", y: "8",  heat: 0.43, symbol: 'u'},
+    {x: "5", y: "8",  heat: 0.41, symbol: 'u'},
+    {x: "4", y: "8",  heat: 0.39, symbol: 'u'},
+    {x: "3", y: "8",  heat: 0.37, symbol: 'u'},
+    {x: "2", y: "8",  heat: 0.37, symbol: 'u'},
+
+    {x: "A", y: "7",  heat: 0.61, symbol: 's'},
+    {x: "K", y: "7",  heat: 0.58, symbol: 's'},
+    {x: "Q", y: "7",  heat: 0.54, symbol: 's'},
+    {x: "J", y: "7",  heat: 0.52, symbol: 's'},
+    {x: "T", y: "7",  heat: 0.51, symbol: 's'},
+    {x: "9", y: "7",  heat: 0.49, symbol: 's'},
+    {x: "8", y: "7",  heat: 0.48, symbol: 's'},
+    {x: "7", y: "7",  heat: 0.66, symbol: ''},
+    {x: "6", y: "7",  heat: 0.42, symbol: 'u'},
+    {x: "5", y: "7",  heat: 0.41, symbol: 'u'},
+    {x: "4", y: "7",  heat: 0.39, symbol: 'u'},
+    {x: "3", y: "7",  heat: 0.37, symbol: 'u'},
+    {x: "2", y: "7",  heat: 0.35, symbol: 'u'},
+
+    {x: "A", y: "6",  heat: 0.60, symbol: 's'},
+    {x: "K", y: "6",  heat: 0.57, symbol: 's'},
+    {x: "Q", y: "6",  heat: 0.54, symbol: 's'},
+    {x: "J", y: "6",  heat: 0.51, symbol: 's'},
+    {x: "T", y: "6",  heat: 0.49, symbol: 's'},
+    {x: "9", y: "6",  heat: 0.47, symbol: 's'},
+    {x: "8", y: "6",  heat: 0.46, symbol: 's'},
+    {x: "7", y: "6",  heat: 0.45, symbol: 's'},
+    {x: "6", y: "6",  heat: 0.63, symbol: ''},
+    {x: "5", y: "6",  heat: 0.40, symbol: 'u'},
+    {x: "4", y: "6",  heat: 0.38, symbol: 'u'},
+    {x: "3", y: "6",  heat: 0.36, symbol: 'u'},
+    {x: "2", y: "6",  heat: 0.34, symbol: 'u'},
+
+    {x: "A", y: "5",  heat: 0.60, symbol: 's'},
+    {x: "K", y: "5",  heat: 0.56, symbol: 's'},
+    {x: "Q", y: "5",  heat: 0.53, symbol: 's'},
+    {x: "J", y: "5",  heat: 0.50, symbol: 's'},
+    {x: "T", y: "5",  heat: 0.47, symbol: 's'},
+    {x: "9", y: "5",  heat: 0.46, symbol: 's'},
+    {x: "8", y: "5",  heat: 0.45, symbol: 's'},
+    {x: "7", y: "5",  heat: 0.44, symbol: 's'},
+    {x: "6", y: "5",  heat: 0.43, symbol: 's'},
+    {x: "5", y: "5",  heat: 0.60, symbol: ''},
+    {x: "4", y: "5",  heat: 0.38, symbol: 'u'},
+    {x: "3", y: "5",  heat: 0.36, symbol: 'u'},
+    {x: "2", y: "5",  heat: 0.34, symbol: 'u'},
+
+    {x: "A", y: "4",  heat: 0.59, symbol: 's'},
+    {x: "K", y: "4",  heat: 0.55, symbol: 's'},
+    {x: "Q", y: "4",  heat: 0.52, symbol: 's'},
+    {x: "J", y: "4",  heat: 0.49, symbol: 's'},
+    {x: "T", y: "4",  heat: 0.47, symbol: 's'},
+    {x: "9", y: "4",  heat: 0.44, symbol: 's'},
+    {x: "8", y: "4",  heat: 0.43, symbol: 's'},
+    {x: "7", y: "4",  heat: 0.42, symbol: 's'},
+    {x: "6", y: "4",  heat: 0.41, symbol: 's'},
+    {x: "5", y: "4",  heat: 0.41, symbol: 's'},
+    {x: "4", y: "4",  heat: 0.57, symbol: ''},
+    {x: "3", y: "4",  heat: 0.35, symbol: 'u'},
+    {x: "2", y: "4",  heat: 0.33, symbol: 'u'},
+
+    {x: "A", y: "3",  heat: 0.58, symbol: 's'},
+    {x: "K", y: "3",  heat: 0.54, symbol: 's'},
+    {x: "Q", y: "3",  heat: 0.51, symbol: 's'},
+    {x: "J", y: "3",  heat: 0.48, symbol: 's'},
+    {x: "T", y: "3",  heat: 0.46, symbol: 's'},
+    {x: "9", y: "3",  heat: 0.43, symbol: 's'},
+    {x: "8", y: "3",  heat: 0.41, symbol: 's'},
+    {x: "7", y: "3",  heat: 0.40, symbol: 's'},
+    {x: "6", y: "3",  heat: 0.40, symbol: 's'},
+    {x: "5", y: "3",  heat: 0.40, symbol: 's'},
+    {x: "4", y: "3",  heat: 0.39, symbol: 's'},
+    {x: "3", y: "3",  heat: 0.54, symbol: ''},
+    {x: "2", y: "3",  heat: 0.32, symbol: 'u'},
+
+    {x: "A", y: "2",  heat: 0.57, symbol: 's'},
+    {x: "K", y: "2",  heat: 0.53, symbol: 's'},
+    {x: "Q", y: "2",  heat: 0.50, symbol: 's'},
+    {x: "J", y: "2",  heat: 0.47, symbol: 's'},
+    {x: "T", y: "2",  heat: 0.45, symbol: 's'},
+    {x: "9", y: "2",  heat: 0.42, symbol: 's'},
+    {x: "8", y: "2",  heat: 0.40, symbol: 's'},
+    {x: "7", y: "2",  heat: 0.38, symbol: 's'},
+    {x: "6", y: "2",  heat: 0.38, symbol: 's'},
+    {x: "5", y: "2",  heat: 0.38, symbol: 's'},
+    {x: "4", y: "2",  heat: 0.37, symbol: 's'},
+    {x: "3", y: "2",  heat: 0.36, symbol: 's'},
+    {x: "2", y: "2",  heat: 0.50, symbol: ''}
+  ]);
+
+  var colorScale = anychart.scales.ordinalColor();
+  // set color for all points
+  colorScale.ranges([
+    {less: 0.35, color: "#e3f2fd"},
+    {from: 0.35, to: 0.45, color: "#D3EDFC"},
+    {from: 0.45, to: 0.50, color: "#BEE7FC"},
+    {from: 0.50, to: 0.55, color: "#aee2fb"},
+    {from: 0.55, to: 0.60, color: "#B3B0D3"},
+    {from: 0.60, to: 0.65, color: "#B691BB"},
+    {from: 0.65, to: 0.70, color: "#B973A3"},
+    {from: 0.70, to: 0.75, color: "#BC558B"},
+    {from: 0.75, to: 0.80, color: "#BF3673"},
+    {greater: 0.80, color: "#c2185b"}
+  ]);
+  chart.colorScale(colorScale);
+
+  // Sets selection mode for single selection
+  chart.interactivity().selectionMode("none");
+
+  // Sets title
+  chart.padding([10,20,10,20])
+  .title()
+    .useHtml(true)
+    .enabled(true)
+    .padding([0,0,10,5])
+    .align('left')
+    .text("Poker Spread Sheet <span style='font-size: 13px; color:#B9B9B9'>(Texas Hold'em)</span>");
+
+  // Sets chart labels
+  chart.labels().enabled(true).maxFontSize(14).textFormatter(function(){
+    return this.x + this.y + this.getDataValue('symbol');
+  });
+
+  // Turns off axes
+  chart.yAxis(null);
+  chart.xAxis(null);
+
+  // Sets chart and hover chart settings
+  chart.stroke('#fff');
+  chart.hoverStroke('6 #fff');
+  chart.hoverFill('#545f69');
+  chart.hoverLabels().fontColor('#fff');
+
+  // Sets legend
+  chart.legend()
+    .align('top')
+    .position('right')
+    .itemsLayout('v')
+    .padding([2,10,0,20])
+    .enabled(true).tooltip().enabled(false);
+
+  // Sets tooltip
+  chart.tooltip()
+      .titleFormatter(function() {
+var s = '';
+if (this.getDataValue('symbol') == 's') s = 'suited';
+else if (this.getDataValue('symbol') == 'u') s = 'unsuited';
+return this.x + this.y + ' ' + s;
+      })
+      .textFormatter(function() {
+return 'Win statistic: ' + this.heat;
+      });
+
+  chart.container("container");
+  chart.draw();
+});
+        </script>
+    </body>
+</html>

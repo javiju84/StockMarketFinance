@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>ACME Products by Revenue</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+  // makes tree from the data for the sample
+  var data = anychart.data.tree(products_data, anychart.enums.TreeFillingMethod.AS_TABLE);
+  chart = anychart.treeMap(data);
+
+  // sets title for chart and customizes it
+  chart.title().enabled(true).padding([0,  0,  20,  0]).useHtml(true).text(
+  'Top ACME Products by Revenue<br/>' +
+  '<span style="color:#212121; font-size: 13px;">(average sales during the year, in $)</span>'
+  );
+
+  // sets scale
+  var scale = anychart.scales.ordinalColor([
+    {less: 25000},
+    {from: 25000, to: 30000},
+    {from: 30000, to: 40000},
+    {from: 40000, to: 50000},
+    {from: 50000, to: 100000},
+    {greater: 100000}
+  ]);
+
+  // setting the number of levels shown
+  chart.maxDepth(2);
+
+  // sets chart settings
+  chart.padding([10,10,10,20]);
+  chart.hoverFill('#bdbdbd');
+  chart.selectionMode('none');
+
+  // sets padding for legend
+  chart.legend().enabled(true).padding([0,0,0,20]).position('right').align('top').itemsLayout('vertical');
+
+  // sets settings for labels
+  chart.labels().fontColor('#212121').fontSize(12).useHtml(true).textFormatter(function(){
+     return this.getDataValue('product');
+  });
+
+  // sets settings for headers
+  chart.headers().textFormatter(function(){
+     return this.getDataValue('product');
+  });
+
+  // sets settings for tooltip
+  chart.tooltip().titleFormatter(function(){
+     return this.getDataValue('product');
+  });
+
+  chart.tooltip().useHtml(true).textFormatter(function(){
+    return '<span style="color: #bfbfbf">Revenue: </span>$' + parseInt(this.value).toLocaleString();
+  });
+
+  // sets colors for scale
+  scale.colors(['#ffee58', '#fbc02d', '#f57f17', '#c0ca33',  '#689f38',  '#2e7d32']);
+  chart.colorScale(scale);
+
+  // set container id for the chart
+  chart.container('container');
+
+  // initiate chart drawing
+  chart.draw();
+});
+
+var products_data = [
+  {id: "00", product: 'Products by Revenue', parent: null},
+    {parent: "00", id: "01", product: 'Fruits', value: 692000},
+    {parent: "00", id: "02", product: 'Vegetables', value: 597000},
+    {parent: "00", id: "03", product: 'Dairy', value: 1359000},
+    {parent: "00", id: "04", product: 'Meat', value: 596000},
+
+      {parent: "01", id: "11",  product: "Apples", value: 138000},
+      {parent: "01", id: "12",  product: "Oranges", value: 22000},
+      {parent: "01", id: "13",  product: "Bananas", value: 88000},
+      {parent: "01", id: "14",  product: "Melons", value: 77000},
+      {parent: "01", id: "15",  product: "Apricots", value: 48000},
+      {parent: "01", id: "16",  product: "Plums", value: 48000},
+      {parent: "01", id: "17",  product: "Pineapples", value: 41000},
+      {parent: "01", id: "18",  product: "Cherries", value: 39000},
+      {parent: "01", id: "19",  product: "Tangerines", value: 32000},
+
+      {parent: "02", id: "21",  product: "Potato", value: 189000},
+      {parent: "02", id: "22",  product: "Eggplants", value: 94000},
+      {parent: "02", id: "23",  product: "Tomatoes", value: 63000},
+      {parent: "02", id: "24",  product: "Cucumbers", value: 43000},
+      {parent: "02", id: "25",  product: "Cabbage", value: 30000},
+      {parent: "02", id: "26",  product: "Carrot", value: 29000},
+      {parent: "02", id: "27",  product: "Squash", value: 26000},
+      {parent: "02", id: "28",  product: "Capsicums", value: 23000},
+
+      {parent: "03", id: "31",  product: "Milk", value: 154000},
+      {parent: "03", id: "32",  product: "Curd", value: 142000},
+      {parent: "03", id: "33",  product: "Cheese", value: 43000},
+      {parent: "03", id: "34",  product: "Yogurt", value: 38000},
+      {parent: "03", id: "35",  product: "Kefir", value: 32000},
+
+      {parent: "04", id: "41",  product: "Mutton", value: 154000},
+      {parent: "04", id: "42",  product: "Beef", value: 142000},
+      {parent: "04", id: "43",  product: "Pork", value: 43000},
+      {parent: "04", id: "44",  product: "Veal", value: 38000}
+  ]
+    
+        </script>
+    </body>
+</html>

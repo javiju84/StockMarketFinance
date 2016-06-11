@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>3D Pie Chart</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         
+
+anychart.onDocumentReady(function() {
+  // create pie chart with passed data
+  chart = anychart.pie3d([
+      ['Northfarthing', 235],
+      ['Westfarthing', 552],
+      ['Eastfarthing', 491],
+      ['Southfarthing', 619],
+      ['Buckland', 388],
+      ['Westmarch', 405]
+  ]);
+
+  // set container id for the chart
+  chart.container('container');
+
+  // set chart title text settings
+  chart.title('Population in The Shire');
+  
+  //set chart radius
+  chart.radius('43%');
+
+  // initiate chart drawing
+  chart.draw();
+});
+        </script>
+    </body>
+</html>

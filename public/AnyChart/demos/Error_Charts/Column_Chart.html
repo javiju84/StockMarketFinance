@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Column Chart</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+  // create column chart
+  chart = anychart.column();
+  chart.padding([10,20,0,10]);
+
+  // data for the chart
+  var data_m = anychart.data.set([
+    ['5', 104, 3, 7],
+    ['10', 130, 10, 4],
+    ['15', 165, 16, 15],
+    ['20', 178, 25.4, 15],
+    ['25', 185, 18.3, 9],
+    ['30', 183, 25, 6],
+    ['35', 182, 17, 10],
+    ['40', 180, 8, 10],
+    ['45', 182, 16, 6],
+    ['50', 177, 14, 15]
+  ]).mapAs({
+    x: [0],
+    value: [1],
+    valueLowerError: [2],
+    valueUpperError: [3]
+  });
+  
+  var data_fem = anychart.data.set([
+    ['5', 101, 8, 8],
+    ['10', 120, 10, 4],
+    ['15', 150, 16, 15],
+    ['20', 167, 15.4, 11],
+    ['25', 175, 18.3, 6],
+    ['30', 175, 15, 6],
+    ['35', 173, 17, 8],
+    ['40', 170, 18, 3],
+    ['45', 170, 16, 6],
+    ['50', 163, 14, 3]
+  ]).mapAs({
+    x: [0],
+    value: [1],
+    valueLowerError: [2],
+    valueUpperError: [3]
+  });
+
+  // create column series with data
+  var series_m = chart.column(data_m);
+  var series_fem = chart.column(data_fem);
+  series_fem.fill("#FF9999");
+  series_fem.stroke("none");
+  
+  series_m.name("Male");
+  series_fem.name("Female");
+
+  // set scale minimum and maximum
+  chart.yScale().minimum(0);
+  chart.yScale().maximum(200);
+
+  // set axes names
+  chart.xAxis().title("Age (years)");
+  chart.yAxis().title("Height (years)");
+
+  // set chart title text settings
+  chart.title("Mean Height");
+  chart.legend(true);
+  
+  // males tooltip settings
+  series_m.tooltip().titleFormatter(function(){
+      return this.x+" years old";
+  });
+  series_m.tooltip().textFormatter(function(){
+      return (this.value-this.valueLowerError)+" cm < "+ this.value + "cm < " + (this.value+this.valueUpperError) + "cm";
+  });
+  
+  // females tooltip settings
+  series_fem.tooltip().titleFormatter(function(){
+      return this.x+" years old";
+  });
+  series_fem.tooltip().textFormatter(function(){
+      return (this.value-this.valueLowerError)+" cm < "+ this.value + "cm < " + (this.value+this.valueUpperError) + "cm";
+  });
+
+  // set container id for the chart
+  chart.container('container');
+  
+  // initiate chart drawing
+  chart.draw();
+});
+        </script>
+    </body>
+</html>

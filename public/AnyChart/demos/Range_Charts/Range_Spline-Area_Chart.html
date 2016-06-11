@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Range Spline-Area Chart</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+  // create column chart
+  chart = anychart.area();
+
+  // set container id for the chart
+  chart.container('container');
+
+  // set chart title text settings
+  chart.title('Weather in New York in 2010 (°F)');
+
+  // create area series with passed data
+  var ranges_data = anychart.data.set([
+    {low: 25, high: 34, month: 'Jan'},
+    {low: 24, high: 35, month: 'Feb'},
+    {low: 32, high: 55, month: 'Mar'},
+    {low: 48, high: 68, month: 'Apr'},
+    {low: 59, high: 79, month: 'May'},
+    {low: 70, high: 89, month: 'June'},
+    {low: 81, high: 103, month: 'July'},
+    {low: 77, high: 90, month: 'Aug'},
+    {low: 63, high: 75, month: 'Sep'},
+    {low: 55, high: 63, month: 'Oct'},
+    {low: 42, high: 51, month: 'Nov'},
+    {low: 32, high: 35, month: 'Dec'}
+]);
+
+  var data = ranges_data.mapAs(null, {x: ['month']});
+  var series = chart.rangeSplineArea(data);
+
+  // initiate chart drawing
+  chart.draw();
+});
+        </script>
+    </body>
+</html>

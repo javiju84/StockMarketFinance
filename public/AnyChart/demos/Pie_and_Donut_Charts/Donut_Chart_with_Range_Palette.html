@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Donut Chart with Range Palette</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         
+anychart.onDocumentReady(function() {
+  // create pie chart with passed data
+  chart = anychart.pie([
+    ['Rouge', 80540],
+    ['Foundation', 94190],
+    ['Mascara', 102610],
+    ['Lip gloss', 110430],
+    ['Pomade', 128000],
+    ['Nail polish', 143760]
+  ]);
+
+  // set container id for the chart
+  chart.container('container');
+
+  // set chart title text settings
+  chart.title('ACME corp. sales chart. The share of products.');
+
+  // create range color palette with color ranged between light blue and dark blue
+  var palette = anychart.palettes.rangeColors();
+  palette.colors([
+    {color: '#64b5f6'},
+    {color: '#455a64'}
+  ]);
+
+  //set chart radius
+  chart.innerRadius('40%');
+  
+  
+  // set palette to the chart
+  chart.palette(palette);
+
+  // initiate chart drawing
+  chart.draw();
+});
+        </script>
+    </body>
+</html>

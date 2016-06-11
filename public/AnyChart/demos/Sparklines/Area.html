@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Area</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+  // prepare the data for charts
+  var data = {
+    'sessions': [[1,89, 150], [2, 148], [3, 128], [4, 104], [5, 102], [6, 89], [7, 93], [8, 116], [9, 159], [10, 164], [11, 139], [12, 130], [13, 115], [14, 128], [15, 117], [16, 111], [17, 161], [18, 134], [19, 124], [20, 105], [21, 111], [22, 119], [23, 104], [24, 100], [25, 90], [26, 93], [27, 62], [28, 53], [29, 59], [30, 53]],
+    'lastMonthSessions': [[1,87], [2,140], [3,144], [4, 138], [5, 114], [6, 107], [7, 102], [8, 89], [9, 80], [10, 151], [11, 134], [12, 129], [13, 111], [14, 95], [15, 108], [16, 82], [17, 92], [18, 132], [19, 104],  [20, 125], [21, 131], [22, 112], [23, 117], [24, 104], [25, 90], [26, 93], [27, 89], [28, 61],  [29, 48], [30, 51]],
+    'uniqueSessions': [3, 12, 5, 14, 7, 7, 10, 11, 6, 12, 7, 6, 9, 12, 2, 7, 8, 6, 9, 13, 16, 9, 8, 6, 7, 8, 7, 9, 3, 7, 5, 3, 9, 2, 3, 7, 10, 11, 9, 16, 9, 8, 4, 9, 7, 4, 9, 8, 7, 3],
+    'pageSessions': [40, 35, 32, 33, 36, 29, 39, 27, 35, 37, 36, 27, 32, 34, 27, 30, 37, 38, 40, 40, 33, 28, 28, 31, 36, 26, 32, 30, 38, 38, 26, 29, 29, 40, 36, 34, 34],
+    'pageToSession': [2, 3, 1, 3, 3, 9, 5, 8, 3, 7, 7, 8, 4, 3, 5, 5, 2, 4, 5, 7],
+    'newSessions': [3, 14, 6, 6, 11, 7, 14, 4, 8, 11, 12, 11, 12, 7, 11, 13, 2, 2, 13, 7],
+    'bonusRate': [4.4, 5.2, 5.1, 12.4, 3.5, 7.9, 12.7, 9.3, 5.2, 10.2, 14.7, 5.1, 8.9, 11.8, 2.9, 3.1, 14.3, 10.9, 11.4, 5.2, 9.9, 3.8, 14.1, 8.8, 5.2, 14.0, 5.3],
+    'avgTime': [1339, 1042, 644, 1040, 751, 1058, 732, 1010, 794, 1136, 526, 1782, 1731, 1303, 1785, 1907, 575, 734, 1216, 617, 1235, 833, 541, 501, 832, 1292, 1710, 862, 798, 940],
+    'directTraffic': [6285, 7587, 6954, 8476, 6106, 3516, 10986, 5248, 11380, 7944, 10086, 10066, 6465, 3447, 3291, 10844, 6044, 11223, 11911, 5364, 6616, 10525, 3398, 7230, 6725, 10368, 3213, 11459, 8119, 11623, 5177, 3896, 10585, 8660, 10703],
+    'referringSites': [7811, 9167, 5938, 10367, 10763, 6300, 5302, 5559, 9168, 8646, 11818, 10547, 3731, 3782, 5046, 10633, 9236, 10412, 5099, 8822, 8473, 9464, 10367, 9716, 5055],
+    'searchEngine': [4882, 8764, 8253, 10828, 7552, 5590, 10499, 4442, 8049, 4151, 4966, 5143, 11362, 4027, 6539, 11066, 10455, 7022, 7379, 10830, 4658, 5411, 7005, 10265, 5032],
+    'goal1': [7954, 7579, 7907, 5282, 8250, 4250, 11659, 6666, 4177, 4553, 8792, 4246, 10460, 3971, 11234, 8042, 4944, 3979, 9441, 7452, 5914, 4618, 10418, 10156, 6553],
+    'goal2': [11957, 6659, 5008, 11875, 9383, 10869, 4610, 9494, 6255, 6193, 9740, 5235, 4568, 4476, 4370, 3884, 6532, 6152, 5673, 8410, 3057, 9749, 6224, 4628, 6839]
+  };
+
+  // create line chart
+  var lineChart = anychart.line();
+  
+  lineChart.title('Web Analytics for April 2015');
+  lineChart.xAxis().labels(false);
+  lineChart.xAxis().ticks(false);
+  lineChart.xAxis().stroke(null);
+  
+  lineChart.tooltip().title("Visits");
+  
+  lineChart.crosshair(true);
+  lineChart.crosshair().yStroke(null);
+  lineChart.crosshair().yLabel(null);
+  
+
+  var legend = lineChart.legend();
+  legend.title('Visits for months');
+  legend.enabled(true);
+  legend.inverted(true);
+
+  // create line series based on 'sessions' data
+  var currentMonthSeries = lineChart.line(data['sessions']);
+  currentMonthSeries.name('Current Month');
+
+  // create line series based on 'lastMonthSessions' data
+  var lastMonthSeries = lineChart.line(data['lastMonthSessions']);
+  lastMonthSeries.name('Last Month');
+
+  // create table for sparkline charts layout
+  var sparklineTable = anychart.ui.table();
+
+  // set content for sparklineTable
+  sparklineTable.contents([
+    ['Session Metrics', '30 Days', '4/10/2015', null, 'Traffic Metrics', '30 Days', '4/10/2015'],
+    ['Unique Sessions', createSparkLine(data['uniqueSessions']), sum(data['uniqueSessions']), null, 'Direct Traffic', createSparkLine(data['directTraffic']), 21],
+    ['Page Sessions', createSparkLine(data['pageSessions']), sum(data['pageSessions']), null, 'Referring Sites', createSparkLine(data['referringSites']), 19],
+    ['Page/Session', createSparkLine(data['pageToSession']), sum(data['pageToSession']), null, 'Search Engines', createSparkLine(data['searchEngine']), 19],
+    ['New Sessions', createSparkLine(data['newSessions']), sum(data['newSessions']), null, 'Goal Metrics', '30 Days', '4/10/2015'],
+    ['Bounce Rate', createSparkLine(data['bonusRate']), '27%', null, 'Goal 1', createSparkLine(data['goal1']), 18],
+    ['Avg. Time on Site', createSparkLine(data['avgTime']), sum(data['avgTime']) / 30 + 'ms', null, 'Goal 2', createSparkLine(data['goal2']), 17]
+  ]);
+  sparklineTable.hAlign('center');
+  sparklineTable.vAlign('middle');
+  sparklineTable.fontSize(11);
+  sparklineTable.cellBorder(null);
+
+  sparklineTable.getCol(0).hAlign('left');
+  sparklineTable.getCol(4).hAlign('left');
+  sparklineTable.getCol(2).width(70);
+  sparklineTable.getCol(6).width(70);
+  sparklineTable.getCol(3).width(30);
+
+  setupCell(sparklineTable.getRow(0));
+  setupCell(sparklineTable.getCell(4, 4));
+  setupCell(sparklineTable.getCell(4, 5));
+  setupCell(sparklineTable.getCell(4, 6));
+
+  sparklineTable.getCell(0, 3).border().bottom({'color': '#fff', 'thickness': 1});
+
+  /**
+   * Helper function, setups header cell.
+   * @param {Cell.<anychart.ui.table.cell>} Cell to setup
+   */
+  function setupCell(cell){
+    cell.vAlign('bottom')
+    cell.fontColor('#545f69');
+    cell.border().bottom({'color': '#EAEAEA', 'thickness': 1, 'dash': '1 1 1'});
+  }
+
+
+  // create table with four rows and three columns
+  // this table provides layout for the line chart and sparkline charts table
+  layoutTable = anychart.ui.table(4, 3);
+
+  // disable borders for all table cells
+  layoutTable.cellBorder(null);
+
+  // set table parameters
+  layoutTable.getCol(1).width('95%');
+  layoutTable.getRow(1).height(20);
+  layoutTable.getRow(0).minHeight(200);
+  layoutTable.getRow(2).maxHeight(250);
+  layoutTable.getRow(3).height(20);
+
+  // set content for the tables cells
+  layoutTable.getCell(0, 1).content(lineChart);
+  layoutTable.getCell(2, 1).content(sparklineTable);
+
+  // set container id for the table
+  layoutTable.container('container');
+
+  // draw the table and all elements it contains
+  // (you don't need to call the draw method for internal tables and charts)
+  layoutTable.draw();
+
+
+
+  /**
+   * Helper function, creates sparkline chart using anychart.sparkline method,
+   * sets passed data and visual preference.
+   * @param {Array.<number>} array Sparkline data.
+   * @return {anychart.charts.Sparkline} New sparkline chart with passed data.
+   */
+  function createSparkLine(array) {
+    // create sparkline chart with passed data
+    var sparkLine = anychart.sparkline(array);
+    sparkLine.type('area');
+    // enable minimum point
+    sparkLine.minMarkers().enabled(true);
+    return sparkLine;
+  }
+
+  /**
+   * Calculate sum of values in passed Array.
+   * @param {Array.<number>} array List of numbers to calculate.
+   * @return {number} Calculation result.
+   */
+  function sum(array) {
+    var summ = 0;
+    for (var i = 0, count = array.length; i < count; i++) {
+      summ += array[i];
+    }
+    return summ
+  }
+});
+        </script>
+    </body>
+</html>

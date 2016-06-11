@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Interviewing and Recruiting</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+  // prepare data for the chart
+  var data = [
+    {name:"Application", value:100},
+    {name:"Brief Interview by HR", value:70},
+    {name:"Testing", value:57},
+    {name:"Revealing some other information", value:38},
+    {name:"Interview with the director", value:15},
+    {name:"Offer", value:10}
+  ];
+
+  // create funnel chart
+  chart = anychart.funnel(data);
+
+  // set container id for the chart
+  chart.container("container");
+
+  // set chart background color
+  chart.background('white');
+
+  // set chart legend settings
+  var legend = chart.legend();
+  legend.enabled(true);
+  legend.position("center");
+  legend.itemsLayout("horizontal");
+  legend.align("top center");
+
+  // set chart title
+  chart.title("Interviewing and recruiting");
+
+  // set chart base width settings
+  chart.baseWidth("70%");
+  
+  // set the neck height
+  chart.neckHeight("0%");
+
+  // set chart labels settings
+  var labels = chart.labels();
+  labels.position("outsideLeft");
+  labels.textFormatter(function() {
+    return this.name + " - " + this.value + "%";
+  });
+
+  // initiate chart drawing
+  chart.draw();
+});
+        </script>
+    </body>
+</html>

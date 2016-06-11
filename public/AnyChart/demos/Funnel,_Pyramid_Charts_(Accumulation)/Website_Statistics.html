@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Website Statistics</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+  // prepare data for the chart
+  var data = [
+    ["Website Visits", 528756],
+    ["Downloads", 164052],
+    ["Valid Contacts", 112167],
+    ["Interested to Buy", 79128],
+    ["Purchased", 79128]
+  ];
+
+  // create funnel chart
+  chart = anychart.funnel(data);
+
+  // set container id for the chart
+  chart.container("container");
+  
+  // set chart margin
+  chart.margin(10, '20%', 10, '20%');
+
+  // set chart base width settings
+  chart.baseWidth("70%");
+  
+  // set the neck height
+  chart.neckHeight("17%");
+
+  // set chart labels settings
+  var labels = chart.labels();
+  labels.position("outsideleft");
+  labels.textFormatter(function() {
+    return this.x + " - " + this.value;
+  });
+
+  // initiate chart drawing
+  chart.draw();
+});
+        </script>
+    </body>
+</html>

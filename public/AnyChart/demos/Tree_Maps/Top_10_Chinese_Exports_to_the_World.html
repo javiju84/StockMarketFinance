@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        <script src="http://cdn.anychart.com/charts-data/Top_10_Chinese_Exports_to_the_World.js"></script>
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Top 10 Chinese Exports to the World</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+  // makes tree from the data for the sample
+  var data = anychart.data.tree(export_data, anychart.enums.TreeFillingMethod.AS_TABLE);
+  chart = anychart.treeMap(data);
+
+  // sets credits data
+  var credits = chart.credits();
+  credits.enabled(true);
+  credits.url('//www.worldsrichestcountries.com/top_china_exports.html');
+  credits.text('Data source: www.worldsrichestcountries.com/top_china_exports.html');
+
+  // sets title for chart and customizes it
+  chart.title().enabled(true).padding([0,  0,  20,  0]).useHtml(true).text('Top 10 Chinese Export Directions to the World<br/>' +
+  '<span style="color:#212121; font-size: 13px;">According to www.worldsrichestcountries.com</span>');
+  // sets scale
+  var scale = anychart.scales.ordinalColor([
+    {less: 1},
+    {from: 1, to: 2},
+    {from: 2, to: 3},
+    {from: 3, to: 5},
+    {from: 5, to: 15},
+    {from: 15, to: 25},
+    {from: 25, to: 50},
+    {from: 50, to: 100},
+    {greater: 100}
+  ]);
+
+  // setting the number of levels shown
+  chart.hintDepth(1);
+
+  // hintOpacity setting
+  chart.hintOpacity(0.5);
+
+  // sets chart settings
+  chart.hoverFill('#bdbdbd');
+  chart.hoverStroke('#212121');
+  chart.selectionMode('none');
+
+  // sets padding for legend
+  chart.legend().padding([0,0,20,0]);
+
+  // sets settings for labels
+  chart.labels().fontColor('#212121').fontSize(16).useHtml(true).textFormatter(function(){
+     return this.getDataValue('direction') + '<br/><span style="color: #455a64">$' + this.value.toFixed(2) + ' billions</span>';
+  });
+
+  // sets settings for headers
+  chart.headers().textFormatter(function(){
+     return this.getDataValue('direction');
+  });
+
+  // sets settings for tooltip
+  chart.tooltip().title().useHtml(true);
+  chart.tooltip().useHtml(true).textFormatter(function(){
+     var value = this.value.toFixed(2);
+     if (this.getDataValue('percent'))
+      return '<span style="color: #bfbfbf">Revenue: </span>$' + value + ' billions<br/>' +
+   '<span style="color: #bfbfbf">Percent: ' + '</span>' + this.getDataValue('percent') + '%';
+    return '<span style="color: #bfbfbf">Revenue: </span>$' + value + ' billions';
+  });
+
+  // turns on legend on drill down (for all children nodes)
+  chart.listen(anychart.enums.EventType.DRILL_CHANGE, function (e) {
+    if (e.path.length != 1) chart.labels().fontSize(12);
+    else chart.labels().fontSize(16);
+    chart.legend(e.path.length != 1);
+  });
+
+  // sets colors for scale
+  scale.colors(['#e1f5fe', '#b3e5fc', '#81d4fa', '#4fc3f7', '#29b6f6', '#039be5', '#26c6da', '#00b8d4', '#00acc1']);
+  chart.colorScale(scale);
+
+  // set container id for the chart
+  chart.container('container');
+
+  // initiate chart drawing
+  chart.draw();
+});
+    
+        </script>
+    </body>
+</html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Points Operations</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         var path, selectedPoints = [], series;
+    anychart.onDocumentReady(function () {
+// create stage
+stage = anychart.graphics.create('container');
+
+// generate random data of 100 points (from 1 to 100 both inclusive) with values [1..10]
+var data = [];
+for (var i = 1, pointsCount = 101; i < pointsCount; i++) {
+    data.push([i, Math.random() * 10 + 1])
+}
+// create scatter chart
+chart = anychart.scatter();
+
+chart.title('Click on points to connect them');
+
+// creating marker series with some settings
+series = chart.marker(data)
+        .size(3)
+        .hoverSize(5)
+        .selectSize(3)
+        .tooltip(false);
+
+//change interactivity mode
+chart.interactivity().selectionMode('single');
+
+// set container
+chart.container(stage);
+chart.draw();
+
+// creating path and set first point to (pixX, pixY) coords of firstSelectedPoint
+path = stage.path().fill(null).stroke('#cecece');
+
+
+// The first selected points
+selectedPoints = [10, 24, 77];
+
+
+chart.listen('pointsselect', function (e) {
+    // get point data
+    var point = e.point;
+    // we need this condition because if we select next point
+    // there will be another pointsselect event of deselecting
+    // previous point
+    if (!point.selected()) {
+        return true;
+    }
+    // add point to selected
+    selectedPoints.push(point.getIndex());
+
+    // get point's series
+    var pointSeries = point.getSeries();
+
+    // select previously selected points
+    pointSeries.select(selectedPoints);
+
+    connectPoint(point);
+});
+
+chart.listen('chartDraw', function(){
+    // redraw line on chart first draw and chart resize
+    path.zIndex(100000);
+    path.clear();
+    for (var j = 0; j < selectedPoints.length; j++) {
+        // Get the data iterator and select it to firstSelectedPoint
+        var iterator = series.data().getIterator();
+        iterator.select(selectedPoints[j]);
+        connectPoint(iterator, j==0);
+    }
+});
+    });
+
+    // helper function to draw line.
+    function connectPoint(pointData, isMoveTo) {
+// get the pix coords of selected point
+var pixX = series.transformX(pointData.get('x'));
+var pixY = series.transformY(pointData.get('value'));
+if (isMoveTo) path.moveTo(pixX, pixY);
+else {
+    // draw segment
+    path.lineTo(pixX, pixY);
+}
+    }
+
+    
+        </script>
+    </body>
+</html>

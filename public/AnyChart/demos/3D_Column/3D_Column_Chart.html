@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>3D Column Chart</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+
+// create column chart
+chart = anychart.column3d();
+
+// set container id for the chart
+chart.container('container');
+
+// turn on chart animation
+chart.animation(true);
+
+// set chart title text settings
+chart.title('Top 10 Cosmetic Products by Revenue');
+
+// create area series with passed data
+var series = chart.column([
+    ['Rouge', '80540'],
+    ['Foundation', '94190'],
+    ['Mascara', '102610'],
+    ['Lip gloss', '110430'],
+    ['Pomade', '128000'],
+    ['Nail polish', '143760'],
+    ['Eyebrow pencil', '170670'],
+    ['Eyeliner', '213210'],
+    ['Eyeshadows', '249980']
+]);
+
+// set series tooltip settings
+series.tooltip().titleFormatter(function() {
+    return this.x
+});
+series.tooltip().textFormatter(function() {
+    return '$' + parseInt(this.value).toLocaleString()
+});
+series.tooltip().position('top').anchor('bottom').offsetX(0).offsetY(5);
+
+// set scale minimum
+chart.yScale().minimum(0);
+
+// set yAxis labels formatter
+chart.yAxis().labels().textFormatter(function(){
+    return this.value.toLocaleString();
+});
+
+chart.tooltip().positionMode('point');
+chart.interactivity().hoverMode('byX');
+
+chart.xAxis().title('Products by Revenue');
+chart.yAxis().title('Revenue in Dollars');
+
+chart.grid();
+chart.grid(1).layout('vertical');
+
+// initiate chart drawing
+chart.draw();
+    });
+
+        </script>
+    </body>
+</html>

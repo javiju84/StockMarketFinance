@@ -1,0 +1,370 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>ACME Corp Sales Dashboard</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         
+anychart.onDocumentReady(function() {
+
+    //  Data 2000 - 2014 for the sample
+    var data = {
+'2000': [
+    ['Jan', 31128, 25165], ['Feb', 39675, 23211], ['Mar', 41168, 23480], ['Apr', 39487, 16245],
+    ['May', 28261, 21765], ['Jun', 32458, 28342], ['Jul', 39987, 31876], ['Aug', 45291, 33745],
+    ['Sep', 51376, 31765], ['Oct', 48754, 29876], ['Nov', 51178, 26195], ['Dec', 78543, 37876]
+], '2001': [
+    ['Jan', 37328, 40765], ['Feb', 52875, 30911], ['Mar', 51268, 42080], ['Apr', 46487, 28645],
+    ['May', 34461, 27965], ['Jun', 41758, 42342], ['Jul', 59987, 51276], ['Aug', 70191, 28345],
+    ['Sep', 40476, 36465], ['Oct', 68154, 41876], ['Nov', 83778, 33995], ['Dec', 68643, 27976]
+], '2002': [
+    ['Jan', 48228, 9165], ['Feb', 39775, 13511], ['Mar', 30568, 8980], ['Apr', 32787, 18245],
+    ['May', 35561, 11965], ['Jun', 45258, 13642], ['Jul', 23687, 14676], ['Aug', 26391, 15645],
+    ['Sep', 28176, 10165], ['Oct', 25454, 17276], ['Nov', 29278, 17395], ['Dec', 60343, 10676]
+], '2003': [
+    ['Jan', 23528, 19465], ['Feb', 30175, 18111], ['Mar', 36668, 17780], ['Apr', 35487, 16245],
+    ['May', 21861, 21765], ['Jun', 40458, 19442], ['Jul', 55987, 16576], ['Aug', 40191, 19745],
+    ['Sep', 37376, 14565], ['Oct', 39254, 23476], ['Nov', 45478, 18195], ['Dec', 61843, 17576]
+], '2004': [
+    ['Jan', 42628, 20265], ['Feb', 53075, 12811], ['Mar', 53168, 13080], ['Apr', 47187, 11345],
+    ['May', 56261, 27765], ['Jun', 49058, 44742], ['Jul', 61587, 16576], ['Aug', 75291, 19545],
+    ['Sep', 80176, 20765], ['Oct', 78754, 22176], ['Nov', 59178, 30595], ['Dec', 49743, 49876]
+], '2005': [
+    ['Jan', 69928, 20365], ['Feb', 54875, 18011], ['Mar', 43568, 16580], ['Apr', 33987, 9745],
+    ['May', 14961, 12265], ['Jun', 22758, 16342], ['Jul', 23587, 21476], ['Aug', 31391, 23345],
+    ['Sep', 22276, 22265], ['Oct', 33554, 14676], ['Nov', 40878, 15395], ['Dec', 47043, 26176]
+], '2006': [
+    ['Jan', 41628, 12365], ['Feb', 63675, 10411], ['Mar', 59668, 7480], ['Apr', 53487, 9245],
+    ['May', 38761, 8365], ['Jun', 26458, 2642], ['Jul', 32487, 10276], ['Aug', 22291, 16845],
+    ['Sep', 32876, 14265], ['Oct', 54254, 22876], ['Nov', 65178, 20095], ['Dec', 55043, 16876]
+], '2007': [
+    ['Jan', 48128, 7165], ['Feb', 17975, 7211], ['Mar', 10468, 6680], ['Apr', 10087, 4445],
+    ['May', 17361, 6065], ['Jun', 24758, 12642], ['Jul', 14987, 12376], ['Aug', 16491, 9445],
+    ['Sep', 16176, 9065], ['Oct', 18054, 10076], ['Nov', 14078, 14995], ['Dec', 8843, 14576]
+], '2008': [
+    ['Jan', 31128, 25165], ['Feb', 39675, 23211], ['Mar', 41168, 23480], ['Apr', 39487, 16245],
+    ['May', 28261, 21765], ['Jun', 32458, 28342], ['Jul', 39987, 31876], ['Aug', 45291, 33745],
+    ['Sep', 51376, 31765], ['Oct', 48754, 29876], ['Nov', 51178, 26195], ['Dec', 78543, 37876]
+], '2009': [
+    ['Jan', 37328, 40765], ['Feb', 52875, 30911], ['Mar', 51268, 42080], ['Apr', 46487, 28645],
+    ['May', 34461, 27965], ['Jun', 41758, 42342], ['Jul', 59987, 51276], ['Aug', 70191, 28345],
+    ['Sep', 40476, 36465], ['Oct', 68154, 41876], ['Nov', 83778, 33995], ['Dec', 68643, 27976]
+], '2010': [
+    ['Jan', 48228, 9165], ['Feb', 39775, 13511], ['Mar', 30568, 8980], ['Apr', 32787, 18245],
+    ['May', 35561, 11965], ['Jun', 45258, 13642], ['Jul', 23687, 14676], ['Aug', 26391, 15645],
+    ['Sep', 28176, 10165], ['Oct', 25454, 17276], ['Nov', 29278, 17395], ['Dec', 60343, 10676]
+], '2011': [
+    ['Jan', 23528, 19465], ['Feb', 30175, 18111], ['Mar', 36668, 17780], ['Apr', 35487, 16245],
+    ['May', 21861, 21765], ['Jun', 40458, 19442], ['Jul', 55987, 16576], ['Aug', 40191, 19745],
+    ['Sep', 37376, 14565], ['Oct', 39254, 23476], ['Nov', 45478, 18195], ['Dec', 61843, 17576]
+], '2012': [
+    ['Jan', 42628, 20265], ['Feb', 53075, 12811], ['Mar', 53168, 13080], ['Apr', 47187, 11345],
+    ['May', 56261, 27765], ['Jun', 49058, 44742], ['Jul', 61587, 16576], ['Aug', 75291, 19545],
+    ['Sep', 80176, 20765], ['Oct', 78754, 22176], ['Nov', 59178, 30595], ['Dec', 49743, 49876]
+], '2013': [
+    ['Jan', 69928, 20365], ['Feb', 54875, 18011], ['Mar', 43568, 16580], ['Apr', 33987, 9745],
+    ['May', 14961, 12265], ['Jun', 22758, 16342], ['Jul', 23587, 21476], ['Aug', 31391, 23345],
+    ['Sep', 22276, 22265], ['Oct', 33554, 14676], ['Nov', 40878, 15395], ['Dec', 47043, 26176]
+], '2014': [
+    ['Jan', 41628, 12365], ['Feb', 63675, 10411], ['Mar', 59668, 7480], ['Apr', 53487, 9245],
+    ['May', 38761, 8365], ['Jun', 26458, 2642], ['Jul', 32487, 10276], ['Aug', 22291, 16845],
+    ['Sep', 32876, 14265], ['Oct', 54254, 22876], ['Nov', 65178, 20095], ['Dec', 55043, 16876]
+]
+    };
+    var products_data = {
+'2000': [
+    ['Nail polish', 12814],
+    ['Eyebrow pencil', 12043],
+    ['Rouge', 3308],
+    ['Pomade', 10119]
+], '2001': [
+    ['Nail polish', 3574],
+    ['Eyebrow pencil', 7004],
+    ['Eyeshadows', 5221],
+    ['Pomade', 11261]
+], '2002': [
+    ['Nail polish', 12814],
+    ['Foundation', 13012],
+    ['Rouge', 22998],
+    ['Eyeliner', 8814]
+], '2003': [
+    ['Eyeliner', 12814],
+    ['Eyebrow pencil', 13012],
+    ['Nail polish', 5067],
+    ['Pomade', 8814]
+], '2004': [
+    ['Mascara', 12814],
+    ['Lip gloss', 13012],
+    ['Rouge', 11624],
+    ['Pomade', 4229]
+], '2005': [
+    ['Foundation', 18712],
+    ['Lip gloss', 13012],
+    ['Rouge', 11624],
+    ['Nail polish', 8814]
+], '2006': [
+    ['Nail polish', 6134],
+    ['Eyebrow pencil', 13012],
+    ['Rouge', 3574],
+    ['Pomade', 8814]
+], '2007': [
+    ['Nail polish', 5221],
+    ['Eyebrow pencil', 4229],
+    ['Rouge', 7004],
+    ['Pomade', 8814]
+], '2008': [
+    ['Nail polish', 9054],
+    ['Eyebrow pencil', 10419],
+    ['Rouge', 11624],
+    ['Pomade', 8814]
+], '2009': [
+    ['Nail polish', 11261],
+    ['Eyebrow pencil', 4376],
+    ['Rouge', 11624],
+    ['Pomade', 8814]
+], '2010': [
+    ['Nail polish', 12814],
+    ['Eyebrow pencil', 13012],
+    ['Rouge', 11624],
+    ['Pomade', 8814]
+], '2011': [
+    ['Nail polish', 12814],
+    ['Eyebrow pencil', 6134],
+    ['Rouge', 11624],
+    ['Pomade', 12814]
+], '2012': [
+    ['Nail polish', 7004],
+    ['Eyebrow pencil', 9256],
+    ['Rouge', 11624],
+    ['Pomade', 8814]
+], '2013': [
+    ['Nail polish', 4376],
+    ['Eyebrow pencil', 3054],
+    ['Rouge', 11624],
+    ['Pomade', 8814]
+], '2014': [
+    ['Nail polish', 4229],
+    ['Eyebrow pencil', 3054],
+    ['Rouge', 7004],
+    ['Pomade', 8814]
+]
+    };
+    var totalDataMap = {
+'2000': {x: '2000', value: sum(data['2000'])},
+'2001': {x: '2001', value: sum(data['2001'])},
+'2002': {x: '2002', value: sum(data['2002'])},
+'2003': {x: '2003', value: sum(data['2003'])},
+'2004': {x: '2004', value: sum(data['2004'])},
+'2005': {x: '2005', value: sum(data['2005'])},
+'2006': {x: '2006', value: sum(data['2006'])},
+'2007': {x: '2007', value: sum(data['2007'])},
+'2008': {x: '2008', value: sum(data['2008'])},
+'2009': {x: '2009', value: sum(data['2009'])},
+'2010': {x: '2010', value: sum(data['2010'])},
+'2011': {x: '2011', value: sum(data['2011'])},
+'2012': {x: '2012', value: sum(data['2012'])},
+'2013': {x: '2013', value: sum(data['2013'])},
+'2014': {x: '2014', value: sum(data['2014'])}
+    };
+
+
+    // Variables for this dashboard
+    var totalDataArray, detailCellName;
+    var detailChart, detailPie;
+    var selectedX = null;
+    var totalSeries = null;
+    var detailSeries_1 = null;
+    var detailSeries_2 = null;
+
+
+    layoutTable = anychart.ui.table(5, 4);
+    layoutTable.cellBorder(null);
+    layoutTable.getCol(0).width('2.5%');
+    layoutTable.getCol(1).width('55%');
+    layoutTable.getCol(3).width('2.5%');
+    layoutTable.getRow(0).height(20);
+    layoutTable.getRow(2).height(50);
+    layoutTable.getRow(4).height(20);
+    detailCellName = layoutTable.getCell(2, 1);
+    detailCellName.colSpan(2);
+    detailCellName.hAlign('center').vAlign('bottom').padding(0, 0, 5, 0).fontSize(16);
+
+
+    detailCellName.border().bottom('3 #EAEAEA');
+    layoutTable.getCell(1, 1).colSpan(2).content(mainChart());
+    layoutTable.getCell(3, 1).content(drawDetailChart());
+    layoutTable.getCell(3, 2).content(drawDetailPie());
+    layoutTable.container('container');
+    layoutTable.draw();
+    drillDown('2014');
+
+
+    /**
+     * Setting up main column chart
+     * @return {chart} column chart
+     */
+    function mainChart() {
+var totalChart = anychart.column();
+totalChart.title('ACME Corporation Sales Dashboard, 2000-2014');
+totalDataArray = getValues(totalDataMap);
+totalSeries = totalChart.column(totalDataArray);
+
+// single select only
+var interactivity = totalChart.interactivity();
+interactivity.selectionMode("singleSelect");
+
+
+selectedMarkers = totalSeries.selectMarkers();
+selectedMarkers.enabled(true);
+selectedMarkers.fill("Gold");
+selectedMarkers.size(10);
+selectedMarkers.type("star5");        
+
+totalSeries.listen('pointClick', function(e) {
+    drillDown(e.iterator.get('x'));
+});
+totalChart.yAxis().labels().textFormatter(function() {
+    return '$' + formatMoney(parseInt(this.value), 0, '.', ',');
+});
+totalSeries.tooltip(null);
+return totalChart
+    }
+
+    /**
+     * Setting up detail stacked column chart
+     * @return {chart} stacked column chart
+     */
+    function drawDetailChart() {
+detailChart = anychart.column();
+detailChart.title().fontSize(14);
+detailChart.yScale().stackMode('value');
+detailChart.yAxis().labels().textFormatter(function() {
+    return '$' + formatMoney(parseInt(this.value), 0, '.', ',');
+});
+return detailChart
+    }
+
+    /**
+     * Setting up detail pie chart
+     * @return {chart} pie chart
+     */
+    function drawDetailPie() {
+detailPie = anychart.pie();
+detailPie.innerRadius(20);
+detailPie.stroke(null);
+detailPie.labels().fontSize(11);
+detailPie.title().fontSize(14);
+detailPie.tooltip().textFormatter(function() {
+    return '$' + formatMoney(parseInt(this.value), 0, '.', ',');
+});
+detailPie.legend().paginator(false);
+return detailPie
+    }
+
+    /**
+     * Drill down to year. Change detail stacked column chart data and pie chart data by year
+     * @param {string} year Drill down year value.
+     */
+    function drillDown(year) {
+var selectedData;
+if (selectedX) {
+    selectedData = totalDataMap[selectedX];
+    selectedData['hatchFill'] = null;
+}
+selectedX = year;
+selectedData = totalDataMap[selectedX];
+
+var detailData = data[selectedX];
+var dataSet = anychart.data.set(detailData);
+var data_1 = dataSet.mapAs({x: [0], value: [1]});
+var data_2 = dataSet.mapAs({x: [0], value: [2]});
+if (!detailSeries_1) detailSeries_1 = detailChart.column(data_1);
+else detailSeries_1.data(data_1);
+if (!detailSeries_2) detailSeries_2 = detailChart.column(data_2);
+else detailSeries_2.data(data_2);
+
+var opacity = 0.85;
+var hoverOpacity = 0.6;
+var stroke_thickness = 1.4;
+detailSeries_1.fill(detailSeries_1.color() + ' ' + opacity);
+detailSeries_1.hoverFill(detailSeries_1.color() + ' ' + hoverOpacity);
+detailSeries_1.stroke(stroke_thickness + ' ' + detailSeries_1.color() + ' ' + opacity);
+detailSeries_1.hoverStroke(stroke_thickness + ' ' + detailSeries_1.color() + ' 1');
+detailSeries_1.name('Revenue');
+detailSeries_1.tooltip().titleFormatter(function(){return this.x});
+detailSeries_1.tooltip().textFormatter(function() {
+    return this.seriesName + ': $' + formatMoney(parseInt(this.value), 0, '.', ',');
+});
+
+detailSeries_2.fill(detailSeries_2.color() + ' ' + opacity);
+detailSeries_2.hoverFill(detailSeries_2.color() + ' ' + hoverOpacity);
+detailSeries_2.stroke(stroke_thickness + ' ' + detailSeries_2.color() + ' ' + opacity);
+detailSeries_2.hoverStroke(stroke_thickness + ' ' + detailSeries_2.color() + ' 1');
+detailSeries_2.name('Profit');
+detailSeries_2.tooltip().titleFormatter(function(){return this.x});
+detailSeries_2.tooltip().textFormatter(function() {
+    return this.seriesName + ': $' + formatMoney(parseInt(this.value), 0, '.', ',');
+});
+
+detailPie.data(products_data[selectedX]);
+detailChart.title('Annual Profit/Revenue by Month');
+detailPie.title('Most popular products');
+
+detailCellName.content(selectedX + ' year sales details');
+totalSeries.data(totalDataArray);
+    }
+
+    /**
+     * Sum of array
+     * @param array - array to sum
+     * @param {float} result
+     */
+    function sum(array) {
+var result = 0;
+for (var i = 0, count = array.length; i < count; i++) {
+    var item = array[i];
+    result += item[1] + item[2];
+}
+return result;
+    }
+
+    function getValues(obj) {
+var res = [];
+var i = 0;
+for (var key in obj) {
+    res[i++] = obj[key];
+}
+return res;
+    }
+
+    function formatMoney(value, c, d, t) {
+var n = value,
+        c = isNaN(c = Math.abs(c)) ? 2 : c,
+        d = d == undefined ? "." : d,
+        t = t == undefined ? "," : t,
+        s = n < 0 ? "-" : "",
+        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+        j = (j = i.length) > 3 ? j % 3 : 0;
+return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+    }
+});
+    
+        </script>
+    </body>
+</html>

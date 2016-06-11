@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Spline Area Chart with Missing Points</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+  // create data set on our data
+  var dataSet = anychart.data.set([
+    ['Jan' , 67, 40],
+    ['Feb' , 65, 33],
+    ['Mar' , 63, null], // data row with missing value, it also can be "missing" or NaN
+    ['Apr' , 60, 20],
+    ['May' , 62, 15],
+    ['Jun' , 67, 13],
+    ['Jul' , 70, 16],
+    ['Aug' , 72, null], // data row with missing value, it also can be "missing" or NaN
+    ['Sep', 73, 16],
+    ['Oct', 70, 24],
+    ['Nov', 72, 30],
+    ['Dec', 70, 38]
+  ]);
+
+  // map data for the first series, take x from the zero column and value from the first column of data set
+  var seriesData_1 = dataSet.mapAs({x: [0], value: [1]});
+
+  // map data for the second series, take x from the zero column and value from the second column of data set
+  var seriesData_2 = dataSet.mapAs({x: [0], value: [2]});
+
+  // create area chart
+  chart = anychart.area();
+
+  // turn on chart animation
+  chart.animation(true);
+  chart.padding([10,20,5,20]);
+
+  // Y axis title
+  chart.yAxis().title('Relative humidity');
+  // Y axis labels formatting
+   chart.yAxis().labels().textFormatter("{%Value}%")
+  // Minimum and maximum
+  chart.yScale().minimum(0).maximum(100);
+
+
+  // set chart title text settings
+  chart.title('AVERAGE HUMIDITY OVER THE YEAR<br/>' +
+  '<span style="color:#212121; font-size: 13px;">mean monthly relative humidity</span>');
+  chart.title().useHtml(true).padding([0,0,5,0]);
+
+
+  // create first series with mapped data
+  var series_1 = chart.splineArea(seriesData_1);
+  series_1.name("Gotham").hoverMarkers().enabled(true).type('circle').size(10).stroke('1.5 #fff');
+  series_1.tooltip().valuePostfix("%");
+
+
+  // create second series with mapped data
+  var series_2 = chart.splineArea(seriesData_2);
+  series_2.name("Mos Eisley").hoverMarkers().enabled(true).type('star5').size(10).stroke('1.5 #fff');
+  series_2.tooltip().valuePostfix("%");
+
+  // turn the legend on and place it at the bottom of the chart
+  chart.legend().enabled(true).position('bottom').fontSize(13).padding([20,0,0,0]);
+
+  // set container id for the chart
+  chart.container('container');
+
+  // initiate chart drawing
+  chart.draw();
+});
+        </script>
+    </body>
+</html>

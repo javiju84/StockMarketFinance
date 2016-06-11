@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Diverging Bar Chart</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+  // create column chart
+  chart = anychart.bar();
+
+  // set container id for the chart
+  chart.container('container');
+
+  // data for the sample (completely fiction)
+  var survey_data = [
+    ['Formation and evolution<br/>of the Solar System', 70, 145, 79, 416, 290],
+    ['Giant impact hypothesis<br/>(Earth\'s Moon formation)', 232, 305, 20, 306, 137],
+    ['Origin of water on Earth', 120, 545, 86, 156, 93],
+    ['Conception of Darwinism', 203, 304, 92, 311, 90],
+    ['Linnaean classification<br/>of organisms', 110, 144, 69, 321, 356],
+    ['Historical materialism<br/>by Karl Marx', 100, 447, 39, 119, 295]
+  ];
+
+  // helper function to create series and customize them
+  var createSeries = function(column_number, name){
+      var data = [];
+      for (var i = 0; i < survey_data.length; i++){
+  var value = survey_data[i][column_number]/10;
+  var center = (survey_data[i][3]/10)/2;
+  if (name == 'Don\'t care')
+    data.push({x: survey_data[i][0], low: -value/2, high: value/2, value: value});
+  else if (name == 'Not completely agree')
+    data.push({x: survey_data[i][0], low: center, high: center + value, value: value});
+  else if (name == 'Agree')
+    data.push({x: survey_data[i][0], low: center + survey_data[i][4]/10, high: center + survey_data[i][4]/10 + value, value: value});
+  else if (name == 'Not completely disagree')
+    data.push({x: survey_data[i][0], low: -center, high: -center - value, value: value});
+  else if (name == 'Disagree')
+    data.push({x: survey_data[i][0], low: -center - survey_data[i][2]/10, high: -center - survey_data[i][2]/10 - value, value: value});
+      }
+      var series = chart.rangeBar(data).name(name);
+      series.stroke('3 #fff 1');
+      series.hoverStroke('3 #fff 1');
+      series.selectionMode('none');
+      series.tooltip().titleFormatter(function(){return this.getDataValue('value') * 10 + ' people ' +
+'<span style="font-size: 13px; color: #cbcbcb">(' + this.getDataValue('value') + '%)</span>'});
+      series.tooltip().title().useHtml(true).fontSize(12);
+      series.tooltip().useHtml(true).fontSize(12).textFormatter(function(){
+if (this.seriesName == 'Don\'t care')
+    return this.seriesName + ' about <br/><span style="color: #cbcbcb">' + this.getDataValue('x') + '</span>';
+return this.seriesName + ' with <br/><span style="color: #cbcbcb">' + this.getDataValue('x') + '</span>';
+      });
+  };
+
+  // creates series
+  createSeries(1, 'Disagree');
+  createSeries(2, 'Not completely disagree');
+  createSeries(3, 'Don\'t care');
+  createSeries(4, 'Not completely agree');
+  createSeries(5, 'Agree');
+
+  // sets title for map chart and customizes it
+  chart.title().enabled(true).padding([0,  0,  10,  0]).useHtml(true).text('Diverging Chart<br/>' +
+  '<span style="color:#212121; font-size: 13px;">(According to survey 1000 in ACME corp.)</span>');
+
+  // changes palette for this sample
+  chart.palette(anychart.palettes.distinctColors().colors(['#ef6c00', '#ffa000', '#96a6a6', '#42a5f5', '#1976d2']));
+  chart.legend().padding([20,  0,  10,  0]).position('bottom').enabled(true);
+
+  // creates stack bar chart from multi series chart
+  chart.yScale().stackMode('value');
+
+  // changes settings for axis
+  chart.xAxis().ticks(false);
+  chart.xAxis().title().enabled(true).text('Theories').padding([0,0,10,0]);
+  chart.xAxis().labels().hAlign('right').useHtml(true).fontSize(11).fontColor('#474747').padding([0,10,0,0]);
+  chart.yAxis(1).orientation(top);
+  chart.yAxis().labels().textFormatter(function(){return Math.abs(this.value) + '%'});
+
+  // creates line marker at 0
+  chart.lineMarker().value(0).stroke('#CECECE');
+
+  // initiate chart drawing
+  chart.draw();
+});
+        </script>
+    </body>
+</html>

@@ -1,0 +1,237 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Heat Map with ColorScale</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function () {
+  // Sets data
+  var data = [
+    [0, 0, 2868],
+    [0, 1, 1887],
+    [0, 2, 1000],
+    [0, 3, 2197],
+    [0, 4, 2040],
+    [0, 5, 2028],
+    [0, 6, 1447],
+    [0, 7, 2129],
+    [0, 8, 1346],
+    [0, 9, 1089],
+    [1, 0, 2821],
+    [1, 1, 1259],
+    [1, 2, 1468],
+    [1, 3, 1725],
+    [1, 4, 2789],
+    [1, 5, 2337],
+    [1, 6, 1048],
+    [1, 7, 1931],
+    [1, 8, 1935],
+    [1, 9, 2756],
+    [2, 0, 1445],
+    [2, 1, 2564],
+    [2, 2, 2352],
+    [2, 3, 1150],
+    [2, 4, 1911],
+    [2, 5, 2058],
+    [2, 6, 1591],
+    [2, 7, 1380],
+    [2, 8, 2197],
+    [2, 9, 2896],
+    [3, 0, 2130],
+    [3, 1, 1404],
+    [3, 2, 1133],
+    [3, 3, 2970],
+    [3, 4, 1704],
+    [3, 5, 1943],
+    [3, 6, 2960],
+    [3, 7, 2595],
+    [3, 8, 2258],
+    [3, 9, 1798],
+    [4, 0, 2462],
+    [4, 1, 1076],
+    [4, 2, 1978],
+    [4, 3, 2549],
+    [4, 4, 1933],
+    [4, 5, 2060],
+    [4, 6, 2358],
+    [4, 7, 1005],
+    [4, 8, 2162],
+    [4, 9, 1030],
+    [5, 0, 2696],
+    [5, 1, 2393],
+    [5, 2, 2297],
+    [5, 3, 2634],
+    [5, 4, 1315],
+    [5, 5, 2796],
+    [5, 6, 1878],
+    [5, 7, 1212],
+    [5, 8, 1354],
+    [5, 9, 1644],
+    [6, 0, 2590],
+    [6, 1, 1405],
+    [6, 2, 1312],
+    [6, 3, 1180],
+    [6, 4, 1306],
+    [6, 5, 2374],
+    [6, 6, 2474],
+    [6, 7, 1274],
+    [6, 8, 1790],
+    [6, 9, 1025],
+    [7, 0, 1910],
+    [7, 1, 2872],
+    [7, 2, 1368],
+    [7, 3, 2107],
+    [7, 4, 1909],
+    [7, 5, 1657],
+    [7, 6, 2740],
+    [7, 7, 2646],
+    [7, 8, 2631],
+    [7, 9, 2843],
+    [8, 0, 2602],
+    [8, 1, 1775],
+    [8, 2, 2878],
+    [8, 3, 2530],
+    [8, 4, 1141],
+    [8, 5, 2393],
+    [8, 6, 2568],
+    [8, 7, 2693],
+    [8, 8, 2343],
+    [8, 9, 2466],
+    [9, 0, 2354],
+    [9, 1, 1491],
+    [9, 2, 2552],
+    [9, 3, 1678],
+    [9, 4, 1327],
+    [9, 5, 2372],
+    [9, 6, 2863],
+    [9, 7, 1281],
+    [9, 8, 2049],
+    [9, 9, 2593],
+    [10, 0, 1439],
+    [10, 1, 1721],
+    [10, 2, 2849],
+    [10, 3, 2092],
+    [10, 4, 2502],
+    [10, 5, 2258],
+    [10, 6, 1265],
+    [10, 7, 1062],
+    [10, 8, 2997],
+    [10, 9, 1286],
+    [11, 0, 2323],
+    [11, 1, 2883],
+    [11, 2, 2867],
+    [11, 3, 2699],
+    [11, 4, 2620],
+    [11, 5, 2372],
+    [11, 6, 1270],
+    [11, 7, 1883],
+    [11, 8, 2979],
+    [11, 9, 1827],
+    [12, 0, 2979],
+    [12, 1, 2511],
+    [12, 2, 2873],
+    [12, 3, 2993],
+    [12, 4, 1651],
+    [12, 5, 1996],
+    [12, 6, 2042],
+    [12, 7, 1589],
+    [12, 8, 2065],
+    [12, 9, 1401],
+    [13, 0, 2686],
+    [13, 1, 2717],
+    [13, 2, 2910],
+    [13, 3, 1284],
+    [13, 4, 2980],
+    [13, 5, 1069],
+    [13, 6, 2467],
+    [13, 7, 2310],
+    [13, 8, 2555],
+    [13, 9, 2472],
+    [14, 0, 1262],
+    [14, 1, 2798],
+    [14, 2, 1978],
+    [14, 3, 1921],
+    [14, 4, 1417],
+    [14, 5, 1072],
+    [14, 6, 1514],
+    [14, 7, 1074],
+    [14, 8, 1454],
+    [14, 9, 2420]
+];
+  var dataSet = anychart.data.set(data);
+  var heatMapData = dataSet.mapAs({x: [0], y: [1], heat: [2]});
+
+  // Creates Heat Map
+  chart = anychart.heatMap(heatMapData);
+
+  // Sets chart title
+  chart.title('Server Fans Speed Monitoring (rpm)');
+
+  // Sets selection mode for single selection.
+  chart.interactivity().selectionMode("none");
+  chart.labelsDisplayMode('drop');
+
+  // Sets range for colorScale
+  var colorScale = chart.colorScale();
+  // Sets colors for all points
+  colorScale.ranges([
+    {from: 0, to: 1300, name: 'Low', color: '#aee2fb'},
+    {from: 1300, to: 2300, name: 'Normal', color: '#69bce8'},
+    {from: 2300, to: 3000, name: 'High', color: '#3085be'}
+  ]);
+  chart.colorScale(colorScale);
+
+  // Sets labels and maximum FontSize
+  chart.labels().enabled(true).maxFontSize(14);
+
+  // Sets chart settings and hover chart settings
+  chart.stroke('#fff');
+  chart.hoverStroke('6 #fff');
+  chart.hoverFill('#545f69');
+  chart.hoverLabels().fontColor('#fff');
+
+  // Sets legend
+  chart.legend()
+      .align('center')
+      .position('top')
+      .itemsLayout('h')
+      .enabled(true);
+
+  // Sets Axes TextFormatter
+  chart.yAxis().stroke(null).labels().padding([0, 15, 0, 0]).textFormatter(function () {
+    return 'Server ' + this['tickValue'];
+  });
+  chart.xAxis().stroke(null).labels().textFormatter(function () {
+    return 'Fan ' + this['tickValue'];
+  });
+
+  // Turns off ticks for axes
+  chart.yAxis().ticks().enabled(false);
+  chart.xAxis().ticks().enabled(false);
+
+  // Turns tooltips off
+  chart.tooltip().enabled(false);
+
+  // Draws chart
+  chart.container('container').draw();
+  });
+  
+        </script>
+    </body>
+</html>

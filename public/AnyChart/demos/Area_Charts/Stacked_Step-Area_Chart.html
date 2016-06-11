@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Stacked Step-Area Chart</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+  // create data set on our data
+  var dataSet = anychart.data.set([
+    ['2012', 51, 125, 12],
+    ['\'13', 91, 102, 14],
+    ['\'14', 34, 90, 13],
+    ['\'15', 47, 80, 21],
+    ['\'16', 63, 103, 19]
+  ]);
+
+  // map data for the first series, take x from the zero area and value from the first area of data set
+  var seriesData_1 = dataSet.mapAs({x: [0], value: [1]});
+
+  // map data for the second series, take x from the zero area and value from the second area of data set
+  var seriesData_2 = dataSet.mapAs({x: [0], value: [2]});
+
+  // map data for the third series, take x from the zero area and value from the third area of data set
+  var seriesData_3 = dataSet.mapAs({x: [0], value: [3]});
+
+  // create area chart
+  chart = anychart.area();
+
+  // turn on chart animation
+  chart.animation(true);
+
+  // turn on the crosshair
+  chart.crosshair().enabled(true).yLabel().enabled(false);
+  chart.crosshair().yStroke(null).xStroke('#fff').zIndex(39);
+
+  // set container id for the chart
+  chart.container('container');
+  chart.yAxis().title('Amount of comments collected');
+
+  // force chart to stack values by Y scale.
+  chart.yScale().stackMode('value');
+
+  // set chart title text settings
+  chart.title('Customer satisfaction according to collected comments');
+  chart.title().padding([0,0,5,0]);
+
+  // create first series with mapped data
+  var series_1 =chart.stepArea(seriesData_1);
+  series_1.name('Grateful').hoverMarkers().type('circle').size(4).stroke('1.5 #fff');
+  series_1.markers().zIndex(100);
+
+  // create second series with mapped data
+  var series_2 =chart.stepArea(seriesData_2);
+  series_2.name('Neutral').hoverMarkers().type('circle').size(4).stroke('1.5 #fff');
+  series_2.markers().zIndex(100);
+
+  // create third series with mapped data
+  var series_3 =chart.stepArea(seriesData_3);
+  series_3.name('Disgruntled').hoverMarkers().type('circle').size(4).stroke('1.5 #fff');
+  series_3.markers().zIndex(100);
+
+  // turn the legend on
+  chart.legend().enabled(true).fontSize(13).padding([0,0,20,0]);
+
+  // initiate chart drawing
+  chart.draw();
+});
+        </script>
+    </body>
+</html>

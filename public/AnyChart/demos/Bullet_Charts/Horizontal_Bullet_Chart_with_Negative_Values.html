@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Horizontal Bullet Chart with Negative Values</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         
+anychart.onDocumentReady(function () {
+  var dataSet = {
+    'Alabama': {
+      actualSales: [2.173, 2.313, 2.233, 2.303, 3.743, 1.265, 1.881, 2.854, 1.009, 1.022, 3.165, 2.232],
+      toGoal: [1.508, 3.252, 1.795, 1.329, 2.289, 3.464, 1.98, 3.301, 2.643, 2.254, 1.82, 3.868]
+    },
+    'Alaska': {
+      actualSales: [3.92, 1.433, 2.181, 2.042, 3.357, 2.786, 2.441, 3.205, 1.342, 2.619, 1.811, 3.738],
+      toGoal: [1.329, 1.226, 1.303, 2.848, 1.078, 1.32, 3.081, 1.153, 2.89, 1.911, 2.698, 3.406]
+    },
+    'Arizona': {
+      actualSales: [2.171, 1.522, 3.418, 2.124, 3.741, 1.93, 2.019, 2.317, 1.038, 3.585, 2.048, 3.715],
+      toGoal: [2.033, 1.141, 2.754, 1.386, 1.808, 1.671, 2.332, 3.274, 1.628, 1.588, 2.244, 1.872]
+    },
+    'Idaho': {
+      actualSales: [1.831, 2.913, 2.781, 1.046, 2.032, 3.538, 3.746, 2.654, 1.32, 3.416, 3.86, 3.072],
+      toGoal: [3.438, 3.772, 2.881, 1.971, 3.214, 1.403, 3.151, 2.31, 1.42, 1.117, 2.638, 3.578]
+    },
+    'Illinois': {
+      actualSales: [1.396, 2.276, 3.223, 1.376, 3.324, 3.671, 3.946, 3.148, 2.799, 3.537, 2.937, 2.203],
+      toGoal: [3.539, 3.474, 3.363, 3.834, 2.237, 2.239, 3.833, 2.913, 1.29, 1.051, 1.098, 1.332]
+    },
+    'Indiana': {
+      actualSales: [2.223, 2.979, 2.902, 1.321, 2.709, 3.249, 1.544, 1.863, 2.751, 3.566, 1.635, 1.772],
+      toGoal: [2.005, 1.513, 1.835, 3.688, 1.776, 2.363, 3.928, 1.604, 1.12, 1.558, 3.978, 1.363]
+    },
+    'Ohio': {
+      actualSales: [3.797, 2.34, 2.955, 1.645, 2.268, 2.507, 2.808, 1.762, 1.433, 3.76, 1.259, 2.017],
+      toGoal: [1.21, 2.74, 3.919, 2.706, 1.44, 3.698, 2.558, 2.386, 1.764, 2.953, 2.166, 1.511]
+    },
+    'Oklahoma': {
+      actualSales: [2.223, 3.569, 2.527, 3.449, 1.407, 2.24, 3.21, 3.104, 3.673, 3.365, 1.879, 2.703],
+      toGoal: [2.441, 3.925, 1.915, 2.419, 2.447, 1.69, 3.138, 1.859, 3.886, 2.072, 3.131, 2.407]
+    },
+    'Oregon': {
+      actualSales: [3.405, 1.784, 3.735, 1.768, 3.243, 2.868, 1.546, 3.761, 2.988, 2.579, 1.353, 2.119],
+      toGoal: [2.516, 1.287, 3.444, 2.822, 3.376, 1.521, 2.289, 2.407, 2.821, 3.82, 3.931, 2.079]
+    },
+    'Vermont': {
+      actualSales: [1.604, 2.514, 3.3, 1.54, 3.477, 1.834, 3.031, 2.749, 2.134, 2.722, 2.839, 1.228],
+      toGoal: [3.024, 1.535, 1.81, 2.234, 3.456, 1.436, 3.891, 3.016, 3.785, 2.826, 1.324, 3.139]
+    },
+    'Virginia': {
+      actualSales: [2.316, 2.339, 1.547, 1.914, 2.731, 3.561, 1.349, 1.247, 2.634, 2.393, 2.264, 2.551],
+      toGoal: [2.724, 3.603, 1.065, 3.948, 2.025, 3.046, 2.524, 3.118, 2.802, 1.878, 1.335, 2.197]
+    },
+    'Washington': {
+      actualSales: [3.718, 2.24, 1.779, 1.698, 1.612, 3.81, 1.548, 3.754, 1.655, 1.505, 3.567, 2.601],
+      toGoal: [2.168, 1.641, 2.654, 3.205, 2.397, 1.37, 3.301, 2.553, 3.433, 3.084, 1.0, 1.49]
+    }
+  };
+
+
+  function createBulletScale(){
+    var axis = anychart.axes.linear();
+    axis.title(null);
+    var scale = anychart.scales.linear();
+    scale.minimum(-30).maximum(30).ticks().interval(15);
+    axis.scale(scale);
+    axis.orientation('bottom');
+    axis.stroke('#CECECE');
+    axis.ticks().enabled(true).stroke('#CECECE').length(4);
+    axis.labels().useHtml(true).padding(0,3,0,10)
+.textFormatter(function () {
+return this.value + '%'
+    });
+    axis.minorTicks(null);
+    return axis
+  }
+
+  function createBulletChart(name){
+    var data = dataSet[name];
+    var target = eval(data['toGoal'].join('+'));
+    var actual = eval(data['actualSales'].join('+'));
+    var diff = 100 - Math.round(actual * 100 / target);
+    var bullet = anychart.bullet([
+    {value: diff, type: 'bar', gap: 0.7, fill: '#64b5f6', stroke: null},
+    {value: 0, 'type': 'line', 'gap': 0.2, fill: '#545f69',
+        stroke: {thickness:2, color: '#545f69'}
+    }
+]);
+    bullet.scale().minimum(-30);
+    bullet.scale().maximum(30);
+
+//    bullet.margin(5, 55, 5, 0);
+    bullet.axis(null);
+    bullet.title(false);
+    bullet.padding(0, -1);
+    bullet.layout('horizontal');
+    return bullet;
+  }
+
+  function calculatePercentToTarget(name){
+    var data = dataSet[name];
+    var target = eval(data['toGoal'].join('+'));
+    var actual = eval(data['actualSales'].join('+'));
+    var diff = 100 - Math.round(actual * 100 / target);
+    if (diff < 0) return '<span style="color: #ef6c00"> +' + Math.abs(diff) + '% </span>';
+    else return '<span style="color: #1976d2">-' + Math.abs(diff) + '%</span>';
+  }
+
+  table = anychart.ui.table();
+  table.getCol(1).width(100).hAlign('right').cellPadding(0,10,0,0);
+  table.getCol(3).width(60).useHtml(true).hAlign('center').cellPadding(0,0,0,0);
+  table.getRow(0).fontSize(15);
+  table.cellBorder(null);
+  table.getRow(1).vAlign('bottom').cellBorder().bottom('1px #CECECE');
+  table.getCol(2).cellPadding(0,0,0,10);
+
+  table.contents([
+      [null, null, null, null, null],
+      [null, 'Region', null, null, null],
+      [null, 'Alabama', createBulletChart('Alabama'), calculatePercentToTarget('Alabama'), null],
+      [null, 'Alaska', createBulletChart('Alaska'), calculatePercentToTarget('Alaska'), null],
+      [null, 'Arizona', createBulletChart('Arizona'), calculatePercentToTarget('Arizona'), null],
+      [null, 'Idaho', createBulletChart('Idaho'), calculatePercentToTarget('Idaho'), null],
+      [null, 'Illinois', createBulletChart('Illinois'), calculatePercentToTarget('Illinois'), null],
+      [null, 'Indiana', createBulletChart('Indiana'), calculatePercentToTarget('Indiana'), null],
+      [null, 'Ohio', createBulletChart('Ohio'), calculatePercentToTarget('Ohio'), null],
+      [null, 'Oklahoma', createBulletChart('Oklahoma'), calculatePercentToTarget('Oklahoma'), null],
+      [null, 'Oregon', createBulletChart('Oregon'), calculatePercentToTarget('Oregon'), null],
+      [null, 'Vermont', createBulletChart('Vermont'), calculatePercentToTarget('Vermont'), null],
+      [null, 'Virginia', createBulletChart('Virginia'), calculatePercentToTarget('Virginia'), null],
+      [null, 'Washington', createBulletChart('Washington'), calculatePercentToTarget('Washington'), null],
+      [null, null, createBulletScale(), null, null],
+      [null, null, null, null, null]
+      ]);
+  table.getCol(0).width(40);
+  table.getCol(4).width(40);
+
+  table.getCell(0,1).colSpan(3)
+  .content('ACME corp. Sales by Region')
+  .hAlign('center')
+  .vAlign('bottom')
+  .fontColor('#212121')
+  .fontSize(16);
+
+  table.getCell(1,0).border().bottom('white');
+  table.getCell(1,4).border().bottom('white');
+
+  table.getCell(1,2).colSpan(2).content('Variance from target').hAlign('center');
+  table.container('container');
+  table.vAlign('middle');
+  table.draw();
+});
+        </script>
+    </body>
+</html>

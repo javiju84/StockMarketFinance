@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Stacked 3D Column Chart</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+  // create data set on our data
+  var dataSet = anychart.data.set([
+    ['Espresso', 1, null, null, null, null, null],
+    ['Doppio', 2, null, null, null, null, null],
+    ['Trippio', 3, null, null, null, null, null],
+    ['Americano', 1, 3, null, null, null, null],
+    ['Cappuchino', 1, null, 1, 2, null, null],
+    ['Macchiato', 2.5, null, null, 1, null, null],
+    ['Latte', 1, null, 2, 1, null, null],
+    ['Latte Macchiato', 1, null, 2, null, 1, null],
+    ['Vienna Coffee', 1, null, null, null, 2, null],
+    ['Mocco', 1, null, 1, null, 1, 1]
+  ]);
+
+  // map data for the first series, take x from the zero column and value from the first column of data set
+  var espresso = dataSet.mapAs({x: [0], value: [1]});
+
+  // map data for the second series, take x from the zero column and value from the second column of data set
+  var water = dataSet.mapAs({x: [0], value: [2]});
+
+  // map data for the second series, take x from the zero column and value from the third column of data set
+  var milk = dataSet.mapAs({x: [0], value: [3]});
+
+  // map data for the fourth series, take x from the zero column and value from the fourth column of data set
+  var shacked_milk = dataSet.mapAs({x: [0], value: [4]});
+
+  // map data for the fifth series, take x from the zero column and value from the fourth column of data set
+  var cream = dataSet.mapAs({x: [0], value: [5]});
+
+  // map data for the sixth series, take x from the zero column and value from the fourth column of data set
+  var chocolate = dataSet.mapAs({x: [0], value: [6]});
+
+  // create bar chart
+  chart = anychart.column3d();
+
+//  chart.background().fill('#f7f3f3');
+
+  // force chart to stack values by Y scale.
+  chart.yScale().stackMode('value');
+
+  // set container id for the chart
+  chart.container('container');
+
+  // turn on chart animation
+  chart.animation(true);
+
+  // set chart title text settings
+  chart.title('Types of Coffee');
+  chart.title().padding([0,0,15,0]);
+
+  // helper function to setup label settings for all series
+  var setupSeriesLabels = function(series, name, color) {
+    series.fill(color);
+    series.name(name);
+    series.stroke('1 #f7f3f3 1');
+    series.hoverStroke('3 #f7f3f3 1');
+    series.tooltip().textFormatter(function(){
+      return this.value + ' ' + this.seriesName;
+    });
+  };
+
+  // temp variable to store series instance
+  var series;
+
+  // create first series with mapped data
+  series = chart.column(espresso);
+  setupSeriesLabels(series, 'Espresso', '#3e2723');
+
+  // create second series with mapped data
+  series = chart.column(water);
+  setupSeriesLabels(series, 'Water', '#64b5f6');
+
+  // create third series with mapped data
+  series = chart.column(milk);
+  setupSeriesLabels(series, 'Milk', '#fff3e0');
+
+  // create fourth series with mapped data
+  series = chart.column(shacked_milk);
+  setupSeriesLabels(series, 'Shacked milk', '#bcaaa4');
+
+  // create fifth series with mapped data
+  series = chart.column(cream);
+  setupSeriesLabels(series, 'Cream', '#e6c1b5');
+
+  // create sixth series with mapped data
+  series = chart.column(chocolate);
+  setupSeriesLabels(series, 'Chocolate', '#bf360c');
+
+  // turn on legend
+  chart.legend().enabled(true).fontSize(13).padding([0,0,20,0]);
+  // set yAxis labels formatter
+  chart.yScale().ticks([0, 1, 2, 3, 4, 5]);
+  chart.xAxis().stroke('#a18b7e').labels().fontColor('#a18b7e');
+  chart.yAxis().stroke('#a18b7e').labels().fontColor('#a18b7e').textFormatter(function(){
+      return this.value.toLocaleString();
+    });
+
+  // set titles for axises
+  chart.yAxis().title().enabled(true).text('Portions of Ingredients').fontColor('#a18b7e');
+  chart.interactivity().hoverMode('byX');
+  chart.tooltip().displayMode('union');
+
+  chart.grid().stroke('#a18b7e');
+  chart.grid(1).layout('vertical').stroke('#a18b7e');
+
+  // initiate chart drawing
+  chart.draw();
+});
+        </script>
+    </body>
+</html>

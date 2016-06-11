@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Single-Series-3D Area Chart with Logarithmic Y-Axis</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+  // create area chart
+  chart = anychart.area3d();
+
+  // set container for the chart
+  chart.container('container');
+
+  // turn on chart animation
+  chart.animation(true);
+
+  // set chart title text settings
+  chart.title('Site Visits During 2014 Year<br/>' +
+  '<span style="color:#212121; font-size: 13px;">Considered to be the total amount of visits, including repeatable</span>');
+  chart.title().useHtml(true);
+
+  chart.yAxis().title('Number of Visits');
+
+  // create logarithmic scale
+  var logScale = anychart.scales.log();
+  logScale.minimum(1);       // set scale minimum value
+  logScale.ticks().count(6); // set fixed major ticks count
+  logScale.minorTicks().mode('logariphmic'); // set minor ticks to use logarithmic distribution
+  logScale.maximumGap(0.2);  // increase scale maximum gap
+
+  // set scale for the chart
+  // it force to use passed scale in all scale dependent entries such axes, grids, crosshairs etc
+  chart.yScale(logScale);
+
+  // create area series on passed data
+  var series = chart.area([
+    ['Jan.', '112'],
+    ['Feb.', '163'],
+    ['Mar.', '229'],
+    ['Apr.', '990'],
+    ['May', '4104'],
+    ['June', '3250'],
+    ['July', '5720'],
+    ['Aug.', '43'],
+    ['Sep.', '61'],
+    ['Oct.', '34'],
+    ['Nov.', '45'],
+    ['Dec.', '122']
+  ]);
+
+  // set series data labels settings
+  series.labels().enabled(true).fontColor('#212121');      // enable data labels settings which is disabled by default
+  // set series data markers settings
+  series.markers(true);
+  series.name('Number of Visits');
+  series.tooltip().position('center').anchor('topLeft').offsetX(5).offsetY(5);
+  chart.tooltip().positionMode('point');
+  chart.interactivity().hoverMode('byX');
+
+  chart.grid();
+  chart.grid(1).layout('vertical');
+
+  // initiate chart drawing
+  chart.draw();
+});
+        </script>
+    </body>
+</html>

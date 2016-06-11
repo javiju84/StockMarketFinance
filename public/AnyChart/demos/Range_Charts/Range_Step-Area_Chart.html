@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Range Step-Area Chart</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+    // create column chart
+    chart = anychart.area();
+
+    // set container id for the chart
+    chart.container('container');
+
+    // set chart title text settings
+    chart.title('Min and Max Connection Timeout');
+
+    // create area series with passed data
+    var ranges_data = anychart.data.set([
+{x: '0', low: 232, high: 542},
+{x: '1', low: 393, high: 522},
+{x: '2', low: 368, high: 602},
+{x: '3', low: 419, high: 612},
+{x: '4', low: 194, high: 1052},
+{x: '5', low: 379, high: 639},
+{x: '6', low: 332, high: 712},
+{x: '7', low: 457, high: 622},
+{x: '8', low: 493, high: 692},
+{x: '9', low: 468, high: 802},
+{x: '10', low: 419, high: 612},
+{x: '11', low: 194, high: 1052},
+{x: '12', low: 579, high: 839},
+{x: '13', low: 532, high: 812},
+{x: '14', low: 579, high: 839},
+{x: '15', low: 532, high: 812},
+{x: '16', low: 557, high: 922},
+{x: '17', low: 593, high: 822},
+{x: '18', low: 668, high: 902},
+{x: '19', low: 619, high: 712},
+{x: '20', low: 694, high: 952},
+{x: '21', low: 679, high: 1039},
+{x: '22', low: 632, high: 912},
+{x: '23', low: 432, high: 712},
+    ]);
+    
+    // create series
+    var series = chart.rangeStepArea(ranges_data);
+    series.stroke(null);
+    
+    // name the axes
+    chart.xAxis().title("Day hours");
+    chart.yAxis().title("ms");
+  
+    // disable hoverMarker
+    series.hoverMarkers(false);
+    series.selectMarkers(false);
+
+    // initiate chart drawing
+    chart.draw();
+});
+        </script>
+    </body>
+</html>

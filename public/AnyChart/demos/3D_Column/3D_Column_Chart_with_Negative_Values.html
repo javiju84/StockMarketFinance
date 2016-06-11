@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>3D Column Chart with Negative Values</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+  // create data set on our data
+  var dataSet = anychart.data.set([
+    ['2001', 128.14, -90.54, -43.76, -122.56],
+    ['2002', 112.61, 104.19, 61.34, -87.12],
+    ['2003', -123.21, 135.12, -34.17, 54.32]
+  ]);
+
+  // map data for the first series, take x from the zero column and value from the first column of data set
+  var seriesData_1 = dataSet.mapAs({x: [0], value: [1]});
+
+  // map data for the second series, take x from the zero column and value from the second column of data set
+  var seriesData_2 = dataSet.mapAs({x: [0], value: [2]});
+
+  // map data for the third series, take x from the zero column and value from the third column of data set
+  var seriesData_3 = dataSet.mapAs({x: [0], value: [3]});
+
+  // map data for the fourth series, take x from the zero column and value from the fourth column of data set
+  var seriesData_4 = dataSet.mapAs({x: [0], value: [4]});
+
+  // create column chart
+  chart = anychart.column3d();
+
+  // set container id for the chart
+  chart.container('container');
+
+  // set chart title text settings
+  chart.title('Company Profit Dynamic in Regions by Year');
+  chart.title().padding([0,0,5,0]);
+  chart.interactivity().hoverMode('single');
+
+  chart.xAxis().stroke(null);
+  chart.xAxis(1).stroke(null).orientation('top');
+  chart.yAxis().title('Profit in Dollars');
+  chart.yAxis().labels().textFormatter(function(){
+    if (this.value == 0) return this.value;
+    return this.value + 'k.'
+  });
+
+  var zeroMarker = chart.lineMarker(0);
+  zeroMarker.stroke("#ddd");
+  zeroMarker.scale(chart.yScale());
+  zeroMarker.value(0);
+
+  // helper function to setup label settings for all series
+  var setupSeries = function(series, name) {
+    series.name(name);
+    series.labels().enabled(true);
+    series.tooltip().titleFormatter(function(){return this.x});
+    series.tooltip().textFormatter(function () {
+return this.seriesName + ': ' + parseInt(this.value).toLocaleString() + 'k.';
+    });
+  };
+
+  // temp variable to store series instance
+  var series;
+
+  // create first series with mapped data
+  series = chart.column(seriesData_1);
+  setupSeries(series, 'Florida');
+
+  // create second series with mapped data
+  series = chart.column(seriesData_2);
+  setupSeries(series, 'Texas');
+
+  // create third series with mapped data
+  series = chart.column(seriesData_3);
+  setupSeries(series, 'Nevada');
+
+  // create fourth series with mapped data
+  series = chart.column(seriesData_4);
+  setupSeries(series, 'Arizona');
+
+  // turn on legend
+  chart.legend().enabled(true).fontSize(13).padding([0,0,20,0]);
+
+  chart.grid();
+  chart.grid(1).layout('vertical');
+
+  chart.barsPadding(0.1);
+  chart.barGroupsPadding(0.9);
+  // initiate chart drawing
+  chart.draw();
+});
+        </script>
+    </body>
+</html>

@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>WinLoss</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+  // prepare the data for charts
+  var t1 = [1, -1, 1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, -1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, 1, -1, 1, -1, 1];
+  var t2 = [-1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, 1, 1, -1, -1, 1, 1, -1, -1, 1, 1, -1, 1, 1, 1, 1, -1, 1, -1, -1, 1, -1, -1, 1, -1];
+  var t3 = [1, 1, 1, -1, 1, -1, 1, 1, -1, 1, 1, 1, -1, -1, 1, -1, -1, 1, 1, 1, -1, -1, -1, 1, 1, -1, -1, -1, -1, 1, -1, -1, 1, -1, 1, -1, -1, 1];
+  var t4 = [1, -1, 1, 1, 1, -1, 1, -1, -1, -1, 1, 1, -1, 1, 1, 1, 1, -1, 1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, 1, 1, 1, -1, -1, -1, -1, -1, -1];
+  var t5 = [-1, 1, -1, 1, 1, -1, 1, -1, -1, 1, -1, -1, -1, -1, 1, 1, 1, -1, 1, -1, -1, -1, -1, 1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, -1, -1, -1, 1];
+  var t6 = [-1, -1, -1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, 1, -1, 1, 1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, -1, -1, -1, 1, 1, -1, 1, 1, -1, 1, 1];
+  var t7 = [-1, 1, -1, 1, 1, -1, -1, -1, -1, -1, 1, 1, 1, -1, 1, -1, 1, -1, 1, 1, 1, -1, -1, -1, -1, -1, 1, -1, -1, -1, 1, -1, 1, 1, 1, -1, -1, 1];
+  var t8 = [-1, 1, 1, -1, 1, 1, 1, -1, 1, 1, -1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, 1, -1];
+  var t9 = [1, -1, 1, 1, -1, 1, -1, -1, -1, -1, 1, 1, -1, -1, -1, -1, -1, 1, 1, -1, -1, 1, 1, 1, -1, 1, 1, -1, -1, 1, 1, -1, -1, -1, 1, -1, -1, -1];
+  var t10 = [1, -1, 1, -1, 1, -1, 1, 1, -1, 1, -1, -1, -1, -1, 1, 1, 1, 1, -1, -1, 1, -1, -1, 1, -1, -1, 1, -1, -1, -1, 1, -1, -1, 1, -1, 1, -1, -1];
+  var t11 = [1, 1, -1, -1, -1, -1, 1, -1, -1, 1, -1, -1, -1, 1, -1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, 1, -1, -1];
+  var t12 = [-1, 1, -1, -1, 1, 1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, -1, 1, -1, -1, 1, -1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1];
+  var t13 = [1, -1, -1, 1, -1, -1, -1, -1, -1, 1, 1, -1, 1, 1, -1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1, 1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, 1, -1];
+  var t14 = [-1, -1, -1, 1, 1, -1, 1, 1, 1, -1, -1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, -1, -1, 1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1];
+  var t15 = [-1, 1, 1, 1, 1, 1, -1, 1, -1, -1, -1, -1, 1, -1, 1, 1, -1, -1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, 1, -1, 1];
+  var t16 = [-1, -1, -1, -1, -1, -1, -1, 1, -1, -1, 1, -1, -1, -1, 1, 1, -1, 1, 1, -1, -1, -1, 1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, 1, 1, -1, -1];
+  var t17 = [-1, -1, -1, -1, -1, -1, 1, -1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, 1, 1, -1, 1, -1, -1, -1, -1, -1, 1, -1, -1, 1, -1, 1, 1, -1];
+  var t18 = [-1, -1, -1, 1, 1, -1, -1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, -1, 1, -1, -1, -1, 1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1];
+  var t19 = [1, -1, -1, -1, 1, 1, -1, 1, -1, 1, -1, -1, 1, -1, -1, -1, -1, -1, 1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1];
+  var t20 = [-1, -1, -1, -1, -1, -1, -1, 1, -1, -1, 1, -1, -1, -1, 1, -1, -1, 1, -1, -1, 1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, 1, -1, -1, 1];
+
+  // create table, this table provides layout for the sparkline charts
+  table = anychart.ui.table();
+
+  // set container id for the table
+  table.container('container');
+
+  // set table size settings
+  table.bounds('5%', '20px', '90%', '90%');
+  
+  // set table contents (sparkline charts and text)
+  table.contents([
+    ['Team', null, 'W', 'L', 'History', 'Percent'],
+    ['1.', 'Liverpool', getWins(t1), getLoses(t1), createWinLoss(t1), getPercent(t1)],
+    ['2.', 'Fulham', getWins(t2), getLoses(t2), createWinLoss(t2), getPercent(t2)],
+    ['3.', 'Chelsea', getWins(t3), getLoses(t3), createWinLoss(t3), getPercent(t3)],
+    ['4.', 'Man United', getWins(t4), getLoses(t4), createWinLoss(t4), getPercent(t4)],
+    ['5.', 'Bolton', getWins(t5), getLoses(t5), createWinLoss(t5), getPercent(t5)],
+    ['6.', 'Blackburn', getWins(t6), getLoses(t6), createWinLoss(t6), getPercent(t6)],
+    ['7.', 'Wigan Athletic', getWins(t7), getLoses(t7), createWinLoss(t7), getPercent(t7)],
+    ['8.', 'West Ham United', getWins(t8), getLoses(t8), createWinLoss(t8), getPercent(t8)],
+    ['9.', 'Charlton', getWins(t9), getLoses(t9), createWinLoss(t9), getPercent(t9)],
+    ['10.', 'Arsenal', getWins(t10), getLoses(t10), createWinLoss(t10), getPercent(t10)],
+    ['11.', 'Sunderland', getWins(t11), getLoses(t11), createWinLoss(t11), getPercent(t11)],
+    ['12.', 'Aston Villa', getWins(t12), getLoses(t12), createWinLoss(t12), getPercent(t12)],
+    ['13.', 'Tottenham', getWins(t13), getLoses(t13), createWinLoss(t13), getPercent(t13)],
+    ['14.', 'Everton', getWins(t14), getLoses(t14), createWinLoss(t14), getPercent(t14)],
+    ['15.', 'West Bromwich', getWins(t15), getLoses(t15), createWinLoss(t15), getPercent(t15)],
+    ['16.', 'Portsmouth', getWins(t16), getLoses(t16), createWinLoss(t16), getPercent(t16)],
+    ['17.', 'Middlesbrough', getWins(t17), getLoses(t17), createWinLoss(t17), getPercent(t17)],
+    ['18.', 'Newcastle', getWins(t18), getLoses(t18), createWinLoss(t18), getPercent(t18)],
+    ['19.', 'Birmingham City', getWins(t19), getLoses(t19), createWinLoss(t19), getPercent(t19)],
+    ['20.', 'Manchester City', getWins(t20), getLoses(t20), createWinLoss(t20), getPercent(t20)]
+  ]);
+
+  // set [0,0] cell settings
+  table.getCell(0, 0).colSpan(2);
+  table.getCell(0, 0).hAlign('left');
+  table.getCell(0, 0).padding(0, 0, 0, 45);
+
+  // disable borders for all cells in the table
+  table.cellBorder('none');
+
+  // set table rows odd/even fill
+  table.rowEvenFill('#F6F7F8');
+  table.rowOddFill('#FFF');
+
+  // set table text settings
+  table.fontFamily('Verdana');
+  table.fontColor('#7c868e');
+  table.fontSize('12px');
+  table.vAlign('center');
+  table.hAlign('center');
+
+  // set fixed width for some of the tables columns
+  table.getCol(0).width(40);
+  table.getCol(1).maxWidth(120);
+  table.getCol(2).width(40);
+  table.getCol(3).width(40);
+  table.getCol(5).width(60);
+
+  // set text settings for columns
+  var firstRow = table.getRow(0);
+  firstRow.cellFill('#e9eaed');
+  firstRow.fontColor('#545f69');
+  table.getCol(1).hAlign('left');
+  var lastColumn = table.getCol(5);
+  lastColumn.fontColor('#545f69');
+
+  // draw the table and all elements it contains
+  //(you don't need to call the draw method for internal tables and charts)
+  table.draw();
+
+  /**
+   * Helper function, creates sparkline chart with WinLos type using anychart.sparkline method,
+   * sets passed data and visual preference.
+   * @param {Array} array Sparkline data.
+   * @return {anychart.charts.Sparkline} New sparkline chart with passed data.
+   */
+  function createWinLoss(array) {
+    var chart = anychart.sparkline(array);
+    chart.background(null);
+    chart.type('winLoss');
+    chart.height('100%');
+    chart.margin().top('5%');
+    chart.margin().bottom('5%');
+    chart.padding(0);
+    return chart;
+  }
+
+  /**
+   * Helper function, returns count of positive values in passed array.
+   * @param {Array} array
+   * @return {number}
+   */
+  function getWins(array) {
+    var wins = 0;
+    for (var i = 0, count = array.length - 1; i < count; i++) {
+      if (array[i] > 0) wins++;
+    }
+    return wins;
+  }
+
+  /**
+   * Helper function, returns count of negative values in passed array.
+   * @param {Array} array
+   * @return {number}
+   */
+  function getLoses(array) {
+    var loses = 0;
+    for (var i = 0, count = array.length - 1; i < count; i++) {
+      if (array[i] < 0) loses++;
+    }
+    return loses;
+  }
+
+  /**
+   * Helper function, returns percent ratio of positive to negative value.
+   * @param {Array} array
+   * @return {string}
+   */
+  function getPercent(array) {
+    var wins = 0;
+    var total = array.length;
+    for (var i = 0, count = array.length - 1; i < count; i++) {
+      if (array[i] > 0) wins++;
+    }
+    return Math.round(wins / total * 100) + '%';
+  }
+});
+        </script>
+    </body>
+</html>

@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>BySpot Hover Logic</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         
+    var randomExt = function(a, b) {
+      return Math.round(Math.random() * (b - a + 1) + a);
+    };
+
+    anychart.onDocumentReady(function() {
+      chart = anychart.polar();
+
+      chart.margin(0);
+      chart.padding(0);
+
+      chart.grid().enabled(true);
+      chart.grid(1).enabled(true).layout('vertical');
+
+      chart.xAxis().enabled(true);
+      chart.yAxis().enabled(true);
+
+      chart.listen('mouseMove', function(event) {
+if (event['target'].paginator)
+  return;
+
+var interactivity = this.interactivity();
+
+if (interactivity.hoverMode() != 'bySpot')
+  return;
+
+var spotRadius = interactivity.spotRadius();
+
+var clientX = event['clientX'];
+var clientY = event['clientY'];
+
+var container = $(this.container().getStage().container());
+var containerOffset = container.offset();
+var scrollLeft = $(document).scrollLeft();
+var scrollTop = $(document).scrollTop();
+
+var x = clientX - (containerOffset.left - scrollLeft);
+var y = clientY - (containerOffset.top - scrollTop);
+
+if (this.getType() == 'polar' || this.getType() == 'radar') {
+  var dataBounds = this.xAxis().getRemainingBounds();
+  var radius = Math.min(dataBounds.width, dataBounds.height) / 2;
+  var cx = Math.round(dataBounds.left + dataBounds.width / 2);
+  var cy = Math.round(dataBounds.top + dataBounds.height / 2);
+
+  var clientRadius = Math.sqrt(Math.pow(cx - x, 2) + Math.pow(cy - y, 2));
+
+  if (clientRadius > radius) {
+    if (this.spotCircle)
+      this.spotCircle.parent(null);
+    if (this.centerLine) this.centerLine.clear();
+    if (this.leftLine) this.leftLine.clear();
+    if (this.rightLine) this.rightLine.clear();
+    return null;
+  }
+
+  if (!this.spotCircle)
+    this.spotCircle = anychart.graphics.circle()
+        .radius(spotRadius)
+        .zIndex(1000)
+        .stroke('black .5');
+
+  if (!this.spotCircle.hasParent())
+    this.spotCircle.parent(this.container());
+
+  this.spotCircle.centerX(x).centerY(y);
+
+  if (!this.centerLine)
+    this.centerLine = this.container().path().zIndex(1000).stroke('black .2').disablePointerEvents(true);
+  this.centerLine.clear().moveTo(cx, cy).lineTo(x, y);
+
+  var dx, dy, angle;
+  var leftSideRatio, rightSideRatio;
+  if (clientRadius - spotRadius >= 0) {
+    dx = cx - x;
+    dy = cy - y;
+
+    angle = Math.atan(dx / dy);
+    if (angle <= 0)
+      angle += Math.PI;
+    if (dx < 0 || (angle == Math.PI && dy > 0))
+      angle += Math.PI;
+    angle += this.startAngle();
+
+    var dAngle = Math.asin(spotRadius / clientRadius);
+    var leftSideAngle = angle + dAngle;
+    var rightSideAngle = angle - dAngle;
+
+    leftSideRatio = 1 - (leftSideAngle / (Math.PI * 2));
+    rightSideRatio = 1 - (rightSideAngle / (Math.PI * 2));
+
+    var leftA = (this.startAngle() - 90 + 360 * leftSideRatio) * Math.PI / 180;
+    var rightA = (this.startAngle() - 90 + 360 * rightSideRatio) * Math.PI / 180;
+
+    if (!this.leftLine) this.leftLine = this.container().path().zIndex(1000).stroke('black .2');
+    this.leftLine.clear().moveTo(cx, cy).lineTo(cx + radius * Math.cos(leftA), cy + radius * Math.sin(leftA));
+
+    if (!this.rightLine) this.rightLine = this.container().path().zIndex(1000).stroke('black .2');
+    this.rightLine.clear().moveTo(cx, cy).lineTo(cx + radius * Math.cos(rightA), cy + radius * Math.sin(rightA));
+  } else {
+    if (this.leftLine) this.leftLine.clear();
+    if (this.rightLine) this.rightLine.clear();
+  }
+} else {
+  var bounds = this.getPixelBounds();
+  if (!bounds.contains({x: x, y: y})) {
+    if (this.spotCircle)
+      this.spotCircle.parent(null);
+    return null;
+  }
+
+  if (!this.spotCircle)
+    this.spotCircle = anychart.graphics.circle()
+        .radius(spotRadius)
+        .zIndex(1000)
+        .stroke('black .5');
+
+  if (!this.spotCircle.parent())
+    this.spotCircle.parent(this.container());
+
+  this.spotCircle.centerX(x).centerY(y);
+}
+      });
+      chart.listen('mouseOut', function(e) {
+if (!(this.getType() == 'polar' || this.getType() ==  'radar')) {
+  if (this.spotCircle)
+    this.spotCircle.parent(null);
+}
+      });
+
+      chart.interactivity({hoverMode: 'bySpot', spotRadius: 40});
+
+      var s1 = chart.line([
+[0, 1],
+[1, 2],
+[2, 3],
+[3, 4],
+[4, NaN],
+[0, 6],
+[1, 7],
+[2, 8],
+[3, NaN],
+[4, 10],
+[0, 11],
+[1, 12],
+[2, NaN],
+[3, 14],
+{x: 4, value: 15, selected: true},
+[0, 16],
+[1, NaN],
+[2, 18],
+[3, 19],
+[4, 20]
+      ]);
+
+
+      var s2 = chart.marker([
+[0.5, 1],
+[1.5, 2],
+[2.5, 3],
+[3.5, 4],
+[4.5, NaN],
+[0.5, 6],
+{x: 1.5, value: 7, selected: true},
+[2.5, 8],
+[3.5, NaN],
+[4.5, 10],
+[0.5, 11],
+[1.5, 12],
+[2.5, NaN],
+[3.5, 14],
+[4.5, 15],
+[0.5, 16],
+[1.5, NaN],
+[2.5, 18],
+[3.5, 19],
+[4.5, 20]
+      ]);
+
+      s1.labels().enabled(true);
+      s2.labels().enabled(true);
+
+      s1.markers(true);
+      s1.hoverMarkers().fill('yellow');
+      s1.selectMarkers().size(s1.hoverMarkers().size() + 2).type('star10');
+
+      s2.hoverFill('yellow');
+      s2.selectSize(s2.hoverSize() + 2).selectType('star10');
+
+      chart.container('container').draw();
+    });
+  
+        </script>
+    </body>
+</html>

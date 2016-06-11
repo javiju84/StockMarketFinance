@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Single-Series Area Chart with Logarithmic Y-Axis</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+  // create area chart
+  chart = anychart.area();
+
+  // turn on chart animation
+  chart.animation(true);
+
+  // set chart title text settings
+  chart.title('WebSite Metrics 2014<br/>' +
+  '<span style="color:#212121; font-size: 13px;">(unique visitors)</span>');
+  chart.title().useHtml(true);
+
+  // axis title
+  chart.yAxis().title('Number of Visitors');
+
+  // create a logarithmic scale
+  var logScale = anychart.scales.log();
+  logScale.minimum(1);       // set scale minimum value
+  logScale.ticks().count(6); // set fixed major ticks count
+  logScale.minorTicks().mode('logarithmic'); // set minor ticks to use logarithmic mode
+  logScale.maximumGap(0.2);  // increase scale maximum gap
+
+  // set scale for the chart
+  // it force to use passed scale in all scale dependent entries such axes, grids, crosshairs etc
+  chart.yScale(logScale);
+
+  // create area series on passed data
+  var series = chart.area([
+    ['Jan', 112],
+    ['Feb', 163],
+    ['Mar', 229],
+    ['Apr', 990],
+    ['May', 4104],
+    ['Jun', 3250],
+    ['Jul', 5720],
+    ['Aug', 43],
+    ['Sep', 61],
+    ['Oct', 34],
+    ['Nov', 45],
+    ['Dec', 122]
+  ]);
+
+  // set series data labels settings
+  series.labels().enabled(true).fontColor('#212121').position("topcenter").anchor("bottomcenter");     
+
+  // turn on series markers
+  series.markers(true);
+
+  // set series name
+  series.name('Number of Visitors');
+
+  // set up tooltips and interactivity settings
+  series.tooltip().position('center').anchor('topLeft').offsetX(5).offsetY(5);
+  chart.tooltip().positionMode('point');
+  chart.interactivity().hoverMode('byX');
+
+  // set container for the chart
+  chart.container('container');
+
+  // initiate chart drawing
+  chart.draw();
+});
+        </script>
+    </body>
+</html>

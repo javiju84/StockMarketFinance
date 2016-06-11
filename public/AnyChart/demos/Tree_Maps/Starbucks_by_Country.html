@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Starbucks by Country</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+
+  // define themes settings for font
+  var customTheme = {
+    defaultFontSettings: {fontFamily: '"Source Sans Pro", sans-serif', fontSize: 13}
+  };
+  anychart.theme(customTheme);
+
+  // makes tree from the data for the sample
+  var data = anychart.data.tree(starbucks_data, anychart.enums.TreeFillingMethod.AS_TABLE);
+  chart = anychart.treeMap(data);
+
+  // sets credits for this sample
+  chart.credits(true);
+  chart.credits().url('//opendata.socrata.com/Business/All-Starbucks-Locations-in-the-World/xy4y-c4mk');
+  chart.credits().text('Data source: https://opendata.socrata.com');
+  chart.credits().logoSrc('http://opendata.socrata.com/stylesheets/images/common/favicon.ico');
+
+  // sets title
+  chart.title().enabled(true).fontSize(18).useHtml(true)
+  .text('Starbucks Distribution by Country<br/>' +
+  '<span style="color: #212121; font-size: 14px">' +
+  'According to opendata.socrata.com</span>');
+
+  // sets chart settings
+  chart.hoverFill('#fcece2');
+  chart.hoverStroke('#a1887f');
+  chart.selectionMode('none');
+
+  // sets scale
+  var scale = anychart.scales.ordinalColor([
+    {less: 10},
+    {from: 10, to: 100},
+    {from: 100, to: 500},
+    {from: 500, to: 1000},
+    {greater: 1000}
+  ]);
+
+  // sets colors for scale
+  scale.colors(['#d8b597', '#CFA185', '#C3866C', '#AD5841', '#9b301c']);
+  chart.colorScale(scale);
+
+  // turns legend on
+  chart.legend().enabled(true).padding([0,0,20,0]);
+
+  // sets labels settings
+  chart.labels().fontSize(16).enabled(true);
+  chart.labels().textOverflow(anychart.graphics.vector.Text.TextOverflow.CLIP).textWrap("noWrap");
+
+  // sets tooltip settings and formatter
+  var tooltip = chart.tooltip();
+  tooltip.background({fill: "#d7ccc8 0.9", stroke: "3 #bcaaa4", corners: 7});
+  tooltip.title().padding({bottom: 8}).fontSize(16).fontColor('#5d4037');
+  tooltip.separator(false);
+  tooltip.padding({top: 10, right: 20, bottom: 10, left: 20}).fontColor('#3e2723');
+  chart.tooltip().useHtml(true).textFormatter(function(){
+    return '<span style="color: #3e2723">Number of Starbucks: ' + '</span>' + parseInt(this.value).toLocaleString();
+  });
+
+  // set container id for the chart
+  chart.container('container');
+
+  // initiate chart drawing
+  chart.draw();
+});
+
+// create data for the sample
+var starbucks_data = [
+  {parent: null, name: "Starbucks Distribution by Country", id: "STBS"},
+  {parent: "STBS", id: "US", name: "United States", value: "13026"},
+  {parent: "STBS", id: "CN", name: "China", value: "2215"},
+  {parent: "STBS", id: "CA", name: "Canada", value: "1421"},
+  {parent: "STBS", id: "JP", name: "Japan", value: "1171"},
+  {parent: "STBS", id: "KR", name: "South Korea", value: "879"},
+  {parent: "STBS", id: "GB", name: "United Kingdom", value: "865"},
+  {parent: "STBS", id: "MX", name: "Mexico", value: "511"},
+  {parent: "STBS", id: "TW", name: "Taiwan", value: "367"},
+  {parent: "STBS", id: "PH", name: "Philippines", value: "274"},
+  {parent: "STBS", id: "TR", name: "Turkey", value: "271"},
+  {parent: "STBS", id: "TH", name: "Thailand", value: "255"},
+  {parent: "STBS", id: "ID", name: "Indonesia", value: "231"},
+  {parent: "STBS", id: "MY", name: "Malaysia", value: "209"},
+  {parent: "STBS", id: "DE", name: "Germany", value: "159"},
+  {parent: "STBS", id: "AE", name: "United Arab Emirates", value: "133"},
+  {parent: "STBS", id: "SG", name: "Singapore", value: "120"},
+  {parent: "STBS", id: "FR", name: "France", value: "112"},
+  {parent: "STBS", id: "RU", name: "Russia", value: "105"},
+  {parent: "STBS", id: "BR", name: "Brazil", value: "103"},
+  {parent: "STBS", id: "AR", name: "Argentina", value: "95"},
+  {parent: "STBS", id: "ES", name: "Spain", value: "90"},
+  {parent: "STBS", id: "KW", name: "Kuwait", value: "86"},
+  {parent: "STBS", id: "CL", name: "Chile", value: "82"},
+  {parent: "STBS", id: "IN", name: "India", value: "81"},
+  {parent: "STBS", id: "PE", name: "Peru", value: "80"},
+  {parent: "STBS", id: "SA", name: "Saudi Arabia", value: "80"},
+  {parent: "STBS", id: "IE", name: "Ireland", value: "65"},
+  {parent: "STBS", id: "CH", name: "Switzerland", value: "62"},
+  {parent: "STBS", id: "NL", name: "Netherlands", value: "57"},
+  {parent: "STBS", id: "PL", name: "Poland", value: "42"},
+  {parent: "STBS", id: "EG", name: "Egypt", value: "31"},
+  {parent: "STBS", id: "GR", name: "Greece", value: "29"},
+  {parent: "STBS", id: "LB", name: "Lebanon", value: "28"},
+  {parent: "STBS", id: "NZ", name: "New Zealand", value: "25"},
+  {parent: "STBS", id: "CZ", name: "Czech Republic", value: "25"},
+  {parent: "STBS", id: "AU", name: "Australia", value: "24"},
+  {parent: "STBS", id: "PR", name: "Puerto Rico", value: "21"},
+  {parent: "STBS", id: "DK", name: "Denmark", value: "19"},
+  {parent: "STBS", id: "AT", name: "Austria", value: "19"},
+  {parent: "STBS", id: "VN", name: "Vietnam", value: "19"},
+  {parent: "STBS", id: "RO", name: "Romania", value: "18"},
+  {parent: "STBS", id: "BH", name: "Bahrain", value: "18"},
+  {parent: "STBS", id: "QA", name: "Qatar", value: "17"},
+  {parent: "STBS", id: "SE", name: "Sweden", value: "16"},
+  {parent: "STBS", id: "NO", name: "Norway", value: "16"},
+  {parent: "STBS", id: "BE", name: "Belgium", value: "14"},
+  {parent: "STBS", id: "JO", name: "Jordan", value: "14"},
+  {parent: "STBS", id: "HU", name: "Hungary", value: "12"},
+  {parent: "STBS", id: "OM", name: "Oman", value: "11"},
+  {parent: "STBS", id: "SV", name: "El Salvador", value: "10"},
+  {parent: "STBS", id: "CO", name: "Colombia", value: "10"},
+  {parent: "STBS", id: "BS", name: "Bahamas", value: "10"},
+  {parent: "STBS", id: "CY", name: "Cyprus", value: "10"},
+  {parent: "STBS", id: "PT", name: "Portugal", value: "10"},
+  {parent: "STBS", id: "CR", name: "Costa Rica", value: "10"},
+  {parent: "STBS", id: "MA", name: "Morocco", value: "7"},
+  {parent: "STBS", id: "GT", name: "Guatemala", value: "7"},
+  {parent: "STBS", id: "FI", name: "Finland", value: "5"},
+  {parent: "STBS", id: "BG", name: "Bulgaria", value: "5"},
+  {parent: "STBS", id: "BN", name: "Brunei Darussalam", value: "5"},
+  {parent: "STBS", id: "BO", name: "Bolivia", value: "3"},
+  {parent: "STBS", id: "AW", name: "Aruba", value: "3"},
+  {parent: "STBS", id: "CW", name: "Curacao", value: "2"},
+  {parent: "STBS", id: "AZ", name: "Azerbaijan", value: "2"},
+  {parent: "STBS", id: "PA", name: "Panama", value: "2"},
+  {parent: "STBS", id: "LU", name: "Luxembourg", value: "2"},
+  {parent: "STBS", id: "KZ", name: "Kazakhstan", value: "2"},
+  {parent: "STBS", id: "MC", name: "Monaco", value: "1"},
+  {parent: "STBS", id: "KH", name: "Cambodia", value: "1"}
+]
+    
+        </script>
+    </body>
+</html>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Wind Direction</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         
+anychart.onDocumentReady(function () {
+    gauge = anychart.circularGauge();
+    gauge
+.fill('#fff')
+.stroke(null)
+.padding(0)
+.margin(30)
+.startAngle(0)
+.sweepAngle(360);
+
+    gauge.axis().labels()
+.padding(3)
+.position('o').textFormatter(function () {
+    return this.value + '\u00B0';
+});
+
+    gauge.data([120, 12]);
+
+    gauge.axis().scale()
+.minimum(0)
+.maximum(360)
+.ticks({interval: 30})
+.minorTicks({interval: 10});
+
+    gauge.axis()
+.fill('#7c868e')
+.startAngle(0)
+.sweepAngle(-360)
+.width(1)
+.ticks({type: 'line', fill: '#7c868e', length: 4, position: 'o'});
+
+    gauge.axis(1)
+.fill('#7c868e')
+.startAngle(270)
+.radius(40)
+.sweepAngle(180)
+.width(1)
+.ticks({type: 'line', fill: '#7c868e', length: 4, position: 'o'});
+
+    gauge.axis(1).labels()
+.padding(3)
+.position('o').textFormatter(function () {
+    return this.value + ' m/s';
+});
+
+    gauge.axis(1).scale()
+.minimum(0)
+.maximum(25)
+.ticks({interval: 5})
+.minorTicks({interval: 1});
+
+    gauge.title()
+.padding(0)
+.margin([0, 0, 10, 0]);
+
+    gauge.marker()
+.fill('#64b5f6')
+.stroke(null)
+.size('15%')
+.zIndex(120)
+.radius('97%');
+
+    gauge.needle()
+.fill('#1976d2')
+.stroke(null)
+.axisIndex(1)
+.startRadius('6%')
+.endRadius('38%')
+.startWidth('2%')
+.middleWidth(null)
+.endWidth('0');
+
+    gauge.cap()
+.radius('4%')
+.fill('#1976d2')
+.enabled(true)
+.stroke(null);
+
+    var bigTooltipTitleSettings = {
+fontFamily: "'Verdana', Helvetica, Arial, sans-serif",
+fontWeight: 'normal',
+fontSize: '12px',
+hAlign: 'left',
+fontColor: '#212121'
+    };
+
+    gauge.label()
+.text('<span style="color: #64B5F6; font-size: 13px">Wind Direction: </span>' +
+'<span style="color: #5AA3DD; font-size: 15px">' + 120 +'\u00B0 (+/- 0.5\u00B0)' + '</span><br>' +
+'<span style="color: #1976d2; font-size: 13px">Wind Speed:</span> ' +
+'<span style="color: #166ABD; font-size: 15px">' + 12 +'m/s' + '</span>').useHtml(true)
+.textSettings(bigTooltipTitleSettings);
+    gauge.label()
+.hAlign('center')
+.anchor('centerTop')
+.offsetY(-20)
+.padding(15, 20)
+.background({fill: '#fff', stroke: {thickness: 1, color: '#E0F0FD'}});
+
+    gauge.container('container');
+    gauge.draw();
+});
+        </script>
+    </body>
+</html>

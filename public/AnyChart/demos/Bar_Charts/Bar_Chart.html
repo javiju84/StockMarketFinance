@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Bar Chart</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+  // create bar chart
+  chart = anychart.bar();
+
+  // turn on chart animation
+  chart.animation(true);
+
+  // set container id for the chart
+  chart.container('container');
+  chart.padding([10,40,5,20]);
+
+  // set chart title text settings
+  chart.title('Top 10 Cosmetic Products by Revenue');
+
+  // create area series with passed data
+  var series = chart.bar([
+    ['Eyeshadows', '249980'],
+    ['Eyeliner', '213210'],
+    ['Eyebrow pencil', '170670'],
+    ['Nail polish', '143760'],
+    ['Pomade', '128000'],
+    ['Lip gloss', '110430'],
+    ['Mascara', '102610'],
+    ['Foundation', '94190'],
+    ['Rouge', '80540'],
+    ['Powder', '53540']
+  ]);
+  // set tooltip formatter
+  series.tooltip().titleFormatter(function(){return this.x});
+  series.tooltip().textFormatter(function () {
+      return '$' + parseInt(this.value).toLocaleString();
+  });
+  series.tooltip().position('right').anchor('left').offsetX(5).offsetY(0);
+
+  // set yAxis labels formatter
+  chart.yAxis().labels().textFormatter(function(){
+      return this.value.toLocaleString();
+    });
+
+  // set titles for axises
+  chart.xAxis().title('Products by Revenue');
+  chart.yAxis().title('Revenue in Dollars');
+  chart.interactivity().hoverMode('byX');
+  chart.tooltip().positionMode('point');
+  // set scale minimum
+  chart.yScale().minimum(0);
+
+  // initiate chart drawing
+  chart.draw();
+});
+
+        </script>
+    </body>
+</html>

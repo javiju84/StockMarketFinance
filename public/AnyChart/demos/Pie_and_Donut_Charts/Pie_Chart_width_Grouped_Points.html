@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Pie Chart width Grouped Points</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         
+anychart.onDocumentReady(function() {
+  // create pie chart with passed data
+  chart = anychart.pie([
+    ['Rouge', 1222],
+    ['Foundation', 2431],
+    ['Mascara', 3624],
+    ['Lip gloss', 5243],
+    ['Pomade', 8813],
+    ['Nail polish', 450],
+    ['Eyebrow pencil', 360],
+    ['Eyeliner', 240],
+    ['Eyeshadows', 420]
+  ]);
+
+  // set container id for the chart
+  chart.container('container');
+
+  // set chart title text settings
+  chart.title('Cosmetic Sales with Grouped Point');
+
+  // set points grouping settings
+  chart.group(function(value) {
+    return (value >= 1000);
+  });
+
+  // initiate chart drawing
+  chart.draw();
+});
+        </script>
+    </body>
+</html>

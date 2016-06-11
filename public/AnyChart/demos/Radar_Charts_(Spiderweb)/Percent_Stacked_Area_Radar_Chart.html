@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Percent Stacked Area Radar Chart</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         
+      anychart.onDocumentReady(function() {
+  // create data set on our data
+  var dataSet = anychart.data.set([
+    ['2007', 1368763, 1991297, 431097, 431097],
+    ['2008', 799873, 1254823, 561983, 799873],
+    ['2009', 1497653, 1732987, 1019874, 332871],
+    ['2010', 1351874, 332871, 2027634, 799873],
+    ['2011', 1582987, 649853, 1961085, 649853]
+  ]);
+
+  // map data for the first series, take x from the zero column and value from the first column of data set
+  var data1 = dataSet.mapAs({x: [0], value: [1]});
+  // map data for the second series, take x from the zero column and value from the second column of data set
+  var data2 = dataSet.mapAs({x: [0], value: [2]});
+  // map data for the third series, take x from the zero column and value from the third column of data set
+  var data3 = dataSet.mapAs({x: [0], value: [3]});
+  // map data for the forth series, take x from the zero column and value from the third column of data set
+  var data4 = dataSet.mapAs({x: [0], value: [4]});
+
+  // create radar chart
+  chart = anychart.radar();
+
+  // set container id for the chart
+  chart.container('container');
+
+  // set chart title text settings
+  chart.title('Region Sales by Year (2007-2011) (Percent Stacked)');
+
+  // force chart to stack values by Y scale.
+  chart.yScale().stackMode('percent');
+
+  // set yAxis settings
+  chart.yAxis().stroke('#545f69');
+  chart.yAxis().ticks().stroke('#545f69');
+
+  // set yAxis labels settings
+  chart.yAxis().labels().fontColor('#545f69')
+  .textFormatter(function() {return this.value + '%'});
+
+  // set xAxis labels appearance settings
+  var xAxisLabels = chart.xAxis().labels();
+  xAxisLabels.padding(5);
+
+  // set chart legend settings
+  chart.legend()
+      .align('center')
+      .position('bottom')
+      .enabled(true);
+
+  // create first series with mapped data and appearance settings
+  var series1 = chart.area(data1);
+  series1.name('Argentina');
+
+  // create second series with mapped data and appearance settings
+  var series2 = chart.area(data2);
+  series2.name('Brasil');
+
+  // create third series with mapped data and appearance settings
+  var series3 = chart.area(data3);
+  series3.name('Chile')
+
+  // create forth series with mapped data and appearance settings
+  var series4 = chart.area(data4);
+  series4.name('Columbia');
+
+  // initiate chart drawing
+  chart.draw();
+});
+    
+        </script>
+    </body>
+</html>

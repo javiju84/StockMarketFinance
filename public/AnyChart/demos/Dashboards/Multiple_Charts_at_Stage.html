@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Multiple Charts at Stage</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+
+  // variable to help us define screen proportions
+  var flag;
+
+  // data for the charts
+  var drinks_data = anychart.data.set([
+    ['Cosmopolitan', 51, 45, 6, 10, 100],
+    ['Martini', 67, 39, 28, 9, 55],
+    ['Mojito', 19, 11, 8, 8, 250],
+    ['Margarita', 47, 33, 14, 9, 110],
+    ['Mai Tai', 32, 20, 12, 10, 210],
+    ['Beer', 70, 20, 50, 5, 300]
+  ]);
+
+  var previous_years_data = anychart.data.set([
+    ['2010', 60, 176, 35, 25],
+    ['2011', 51, 136, 25, 26],
+    ['2012', 73, 196, 35, 38],
+    ['2013', 84, 315, 43, 41],
+    ['2014', 79, 203, 36, 33],
+    ['2015', 89, 286, 41, 48]
+  ]);
+
+  // helper function to setup same settings for all Axis Titles
+  var setupChartAxisTitles = function(chart, titleX, titleY) {
+    chart.xAxis().labels().fontSize(11).padding([0,0,0,0]);
+    chart.yAxis().labels().fontSize(11).padding([0,0,0,0]);
+    if (titleX) chart.xAxis().title().enabled(true).text(titleX).fontSize(12).margin(0).padding([3,0,0,0]);
+    if (titleY) chart.yAxis().title().enabled(true).text(titleY).fontSize(12).margin(0).padding([0,0,3,0]);
+  };
+
+  // helper function to setup same settings for all Charts
+  var setupChartSettings = function(chart) {
+    chart.container(stage);
+    chart.margin(0);
+    chart.padding([15,30,15,15]);
+    chart.title().fontColor('#212121').fontSize(13).padding([0,0,10,0]);
+    chart.draw();
+  };
+
+  // create stage for all charts
+  stage = acgraph.create('container');
+
+  var title = anychart.ui.title();
+  title.text('New Year Parties at ACME corp.');
+  title.background('#ffffff');
+  title.padding(10);
+  title.container(stage);
+  title.draw();
+
+  var pieChart = anychart.pie(drinks_data);
+  pieChart.title('Drinks');
+  pieChart.radius('40%');
+  pieChart.legend().enabled(false);
+  pieChart.labels().position('out').fontSize(10).textFormatter(function(){return this.x});
+  pieChart.tooltip().textFormatter(function(){return this.value + ' orders'});
+  setupChartSettings(pieChart);
+
+  var barChart = anychart.bar();
+  barChart.title('Drinks by Gender');
+  barChart.bar(drinks_data.mapAs({value: [3], x: [0]})).name('Male');
+  barChart.bar(drinks_data.mapAs({value: [2], x: [0]})).name('Female');
+  setupChartAxisTitles(barChart, null, 'Drinks ordered');
+  setupChartSettings(barChart);
+
+  var scatterChart = anychart.bubble();
+  scatterChart.title('Drinks Volumne/Price Ratio');
+  var bubble_series = scatterChart.bubble(drinks_data.mapAs({value: [4], x: [5], size: [1], name: [0]}));
+  bubble_series.tooltip().useHtml(true).titleFormatter(function(){return this.getDataValue('name')}).textFormatter(function(){
+    return '<span style="font-size: 11px;">Price: $' + this.value + '<br/>Volume: ' + this.x + ' ml.<br/>Orders: ' + this.size + '</span>';
+  });
+  setupChartAxisTitles(scatterChart, 'Volume (ml)', 'Price, $');
+  setupChartSettings(scatterChart);
+
+  var lineChart = anychart.line();
+  lineChart.title('Number of drinks by year');
+  lineChart.line(previous_years_data.mapAs({value: [1], x: [0]})).tooltip().textFormatter(function(){
+    return this.value + ' drinks'
+  });
+  setupChartAxisTitles(lineChart, null, 'Drinks ordered');
+  setupChartSettings(lineChart);
+
+  var areaChart = anychart.area();
+  areaChart.title('Parties Turnout');
+  areaChart.area(previous_years_data.mapAs({value: [2], x: [0]})).tooltip().textFormatter(function(){
+    return this.value + ' persons present'
+  });
+  setupChartAxisTitles(areaChart, null, 'Turnout');
+  setupChartSettings(areaChart);
+
+  var columnChart = anychart.column();
+  columnChart.title('Turnout by Gender');
+  columnChart.yAxis().title('Turnout');
+  columnChart.column(previous_years_data.mapAs({value: [3], x: [0]})).name('Male');
+  columnChart.column(previous_years_data.mapAs({value: [4], x: [0]})).name('Female');
+  setupChartAxisTitles(columnChart, null, 'Turnout');
+  setupChartSettings(columnChart);
+
+  // Creates general layout table with two inside layout tables
+  function configureChartsSize() {
+    if (window.innerWidth > 768) {
+      flag = 'wide';
+      pieChart.bounds(0, 30, '33.3%', '47%');
+      barChart.bounds('33.3%', 30, '33.3%', '47%');
+      scatterChart.bounds('66.6%', 30, '33.3%', '47%');
+      lineChart.bounds(0, '52%', '33.3%', '47%');
+      areaChart.bounds('33.3%', '52%', '33.3%', '47%');
+      columnChart.bounds('66.6%', '52%', '33.3%', '47%');
+    } else {
+      flag = 'slim';
+      pieChart.bounds(0, 30, '50%', '33.3%');
+      barChart.bounds('50%', 30, '50%', '33.3%');
+      scatterChart.bounds(0, '33.3%', '50%', '33.3%');
+      lineChart.bounds('50%', '33.3%', '50%', '33.3%');
+      areaChart.bounds(0, '66.6%', '50%', '33.3%');
+      columnChart.bounds('50%', '66.6%', '50%', '33.3%');
+    }
+  }
+  configureChartsSize();
+
+  // On resize change layout to mobile version or otherwise
+  window.onresize = function () {
+    if (flag == 'slim' && window.innerWidth > 767) {
+configureChartsSize('wide');
+    } else if (flag == 'wide' && window.innerWidth <= 767) {
+configureChartsSize('slim');
+    }
+    title.parentBounds(0,0,stage.width(),130).draw();
+
+  }
+});
+    
+        </script>
+    </body>
+</html>

@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Scatter Chart with Axis Ranges</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+
+    // create scatter chart
+    chart = anychart.scatter();
+    chart.line([
+      {x: Date.UTC(2015, 05, 22, 11, 30), value: 26.85, wtf: 7.39},
+      {x: Date.UTC(2015, 05, 22, 11, 00), value: 26.88, wtf: 7.47},
+      {x: Date.UTC(2015, 05, 22, 10, 30), value: 26.86, wtf: 7.42},
+      {x: Date.UTC(2015, 05, 22, 10, 00), value: 26.88, wtf: 7.47},
+      {x: Date.UTC(2015, 05, 22, 09, 30), value: 26.87, wtf: 7.44},
+      {x: Date.UTC(2015, 05, 22, 09, 00), value: 26.89, wtf: 7.49},
+      {x: Date.UTC(2015, 05, 22, 08, 30), value: 26.88, wtf: 7.47},
+      {x: Date.UTC(2015, 05, 22, 08, 00), value: 26.89, wtf: 7.49},
+      {x: Date.UTC(2015, 05, 22, 07, 30), value: 26.88, wtf: 7.47},
+      {x: Date.UTC(2015, 05, 22, 07, 00), value: 26.88, wtf: 7.47},
+      {x: Date.UTC(2015, 05, 22, 06, 30), value: 26.87, wtf: 7.44},
+      {x: Date.UTC(2015, 05, 22, 06, 00), value: 26.86, wtf: 7.42},
+      {x: Date.UTC(2015, 05, 22, 05, 30), value: 26.87, wtf: 7.44},
+      {x: Date.UTC(2015, 05, 22, 05, 00), value: 26.83, wtf: 7.34},
+      {x: Date.UTC(2015, 05, 22, 04, 30), value: 26.83, wtf: 7.34},
+      {x: Date.UTC(2015, 05, 22, 04, 00), value: 26.83, wtf: 7.34},
+      {x: Date.UTC(2015, 05, 22, 03, 30), value: 26.82, wtf: 7.32},
+      {x: Date.UTC(2015, 05, 22, 03, 00), value: 26.79, wtf: 7.24},
+      {x: Date.UTC(2015, 05, 22, 02, 30), value: 26.80, wtf: 7.27},
+      {x: Date.UTC(2015, 05, 22, 02, 00), value: 26.79, wtf: 7.24},
+      {x: Date.UTC(2015, 05, 22, 01, 30), value: 26.76, wtf: 7.17},
+      {x: Date.UTC(2015, 05, 22, 01, 00), value: 26.73, wtf: 7.12},
+      {x: Date.UTC(2015, 05, 22, 00, 30), value: 26.68, wtf: 7.03},
+      {x: Date.UTC(2015, 05, 22, 00, 00), value: 26.64, wtf: 6.96},
+      {x: Date.UTC(2015, 05, 21, 23, 30), value: 26.41, wtf: 6.58},
+      {x: Date.UTC(2015, 05, 21, 23, 00), value: 26.37, wtf: 6.51}
+    ]).name("Observed").stroke('2 #64b5f6').legendItem().iconStroke('none').iconFill('#64b5f6');
+
+    chart.line([
+      {x: Date.UTC(2015, 05, 27, 12, 00), value: 9.70,  wtf: 0.689},
+      {x: Date.UTC(2015, 05, 27, 06, 00), value: 10.10, wtf: 0.758},
+      {x: Date.UTC(2015, 05, 27, 00, 00), value: 10.60, wtf: 0.842},
+      {x: Date.UTC(2015, 05, 26, 18, 00), value: 11.30, wtf: 0.956},
+      {x: Date.UTC(2015, 05, 26, 12, 00), value: 12.00, wtf: 1.07},
+      {x: Date.UTC(2015, 05, 26, 06, 00), value: 12.80, wtf: 1.21},
+      {x: Date.UTC(2015, 05, 26, 00, 00), value: 13.60, wtf: 1.34},
+      {x: Date.UTC(2015, 05, 25, 18, 00), value: 14.30, wtf: 1.45},
+      {x: Date.UTC(2015, 05, 25, 12, 00), value: 14.90, wtf: 1.55},
+      {x: Date.UTC(2015, 05, 25, 06, 00), value: 15.40, wtf: 1.63},
+      {x: Date.UTC(2015, 05, 25, 00, 00), value: 15.40, wtf: 1.63},
+      {x: Date.UTC(2015, 05, 24, 18, 00), value: 15.60, wtf: 1.66},
+      {x: Date.UTC(2015, 05, 24, 12, 00), value: 16.70, wtf: 1.86},
+      {x: Date.UTC(2015, 05, 24, 06, 00), value: 17.20, wtf: 1.94},
+      {x: Date.UTC(2015, 05, 24, 00, 00), value: 18.00, wtf: 2.09},
+      {x: Date.UTC(2015, 05, 23, 18, 00), value: 19.50, wtf: 2.37},
+      {x: Date.UTC(2015, 05, 23, 12, 00), value: 22.00, wtf: 2.98},
+      {x: Date.UTC(2015, 05, 23, 06, 00), value: 25.30, wtf: 5.01},
+      {x: Date.UTC(2015, 05, 23, 00, 00), value: 26.50, wtf: 6.72},
+      {x: Date.UTC(2015, 05, 22, 18, 00), value: 26.90, wtf: 7.52},
+      {x: Date.UTC(2015, 05, 22, 15, 30), value: 26.85, wtf: 7.39},
+      {x: Date.UTC(2015, 05, 22, 15, 00), value: 26.85, wtf: 7.39},
+      {x: Date.UTC(2015, 05, 22, 14, 30), value: 26.85, wtf: 7.39},
+      {x: Date.UTC(2015, 05, 22, 14, 00), value: 26.87, wtf: 7.44},
+      {x: Date.UTC(2015, 05, 22, 13, 30), value: 26.85, wtf: 7.39},
+      {x: Date.UTC(2015, 05, 22, 13, 00), value: 26.86, wtf: 7.42},
+      {x: Date.UTC(2015, 05, 22, 12, 30), value: 26.88, wtf: 7.47},
+      {x: Date.UTC(2015, 05, 22, 12, 00), value: 26.85, wtf: 7.39}
+    ]).name("Forecast").stroke('2 #1976d2').legendItem().iconStroke('none').iconFill('#1976d2');
+
+    chart.xScale(anychart.scales.dateTime());
+
+    chart.xScale()
+      .minimum(Date.UTC(2015, 05, 21, 23, 00))
+      .maximum(Date.UTC(2015, 05, 27, 12, 00))
+      .ticks().interval(0,0,1);
+
+    chart.yScale().maximum(34);
+
+    chart.xAxis().labels()
+      .hAlign("center")
+      .textFormatter(function(){
+var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+var date = new Date(this.tickValue);
+return weekdays[date.getUTCDay()]+ "\n" + date.toLocaleDateString("en-US", {month: "short", day: "numeric"});
+    });
+
+    chart.lineMarker(0)
+      .value(Date.UTC(2015, 05, 22, 11, 32))
+      .layout("vertical")
+      .scale(chart.xScale())
+      .stroke({
+color: "#212121",
+dash: "5 3",
+thickness: 2
+      });
+
+    chart.legend()
+      .enabled(true)
+      .itemsFormatter(function(items){
+var date  = new Date(chart.lineMarker(0).value());
+items.unshift({
+  text: "Graph Created " + date.toLocaleTimeString() + " " + date.toDateString(),
+  iconType: "line",
+  iconStroke: {color: "#212121", dash: "5 3", thickness: 2}
+});
+return items
+      });
+
+    chart.rangeMarker(0)
+      .from(15)
+      .to(21)
+      .fill("#ffe082 0.8");
+
+    chart.rangeMarker(1)
+      .from(21)
+      .to(22)
+      .fill("#ffb300 0.6");
+
+    chart.rangeMarker(2)
+      .from(22)
+      .to(26)
+      .fill("#ff6e40 0.6");
+
+    chart.rangeMarker(3)
+      .from(26)
+      .to(34)
+      .fill("#f48fb1 0.6");
+
+    chart.textMarker(0)
+      .value(15)
+      .offsetX(10)
+      .text("Action: 15.0")
+      .anchor("leftBottom")
+      .align("left")
+      .fontColor("#212121");
+
+    chart.textMarker(1)
+      .value(21)
+      .offsetX(10)
+      .text("Minor: 21.0")
+      .anchor("leftBottom")
+      .align("left")
+      .fontColor("#212121");
+
+    chart.textMarker(2)
+      .value(22)
+      .offsetX(10)
+      .text("Moderate: 22.0")
+      .anchor("leftBottom")
+      .align("left")
+      .fontColor("#212121");
+
+    chart.textMarker(3)
+      .value(26)
+      .offsetX(10)
+      .text("Major: 26.0")
+      .anchor("leftBottom")
+      .align("left")
+      .fontColor("#212121");
+
+    chart.textMarker(4)
+      .value(30.7)
+      .offsetX(10)
+      .offsetY(5)
+      .text("Record: 30.7")
+      .anchor("rightBottom")
+      .align("right")
+      .fontColor("#212121");
+
+    chart.lineMarker(1)
+      .value(30.7)
+      .stroke("1.5 #212121");
+
+    var scale = anychart.scales.log();
+    scale.minimum(0.4).maximum(45);
+    chart.yAxis(1).scale(scale).orientation("right");
+
+    // set container id for the chart
+    chart.container('container');
+    // initiate chart drawing
+    chart.draw();
+});
+        </script>
+    </body>
+</html>

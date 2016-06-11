@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Risk Matrix</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         anychart.onDocumentReady(function() {
+  // Creates Heat Map
+  chart = anychart.heatMap([
+    {x: "Rare",             y: "Insignificant",  heat: 0, fill: "#90caf9"},
+    {x: "Rare",             y: "Minor",          heat: 0, fill: "#90caf9"},
+    {x: "Rare",             y: "Moderate",       heat: 0, fill: "#90caf9"},
+    {x: "Rare",             y: "Major",          heat: 0, fill: "#90caf9"},
+    {x: "Rare",             y: "Extreme",        heat: 0, fill: "#90caf9"},
+    {x: "Unlikely",         y: "Insignificant",  heat: 0, fill: "#90caf9"},
+    {x: "Unlikely",         y: "Minor",          heat: 0, fill: "#90caf9"},
+    {x: "Unlikely",         y: "Moderate",       heat: 0, fill: "#90caf9"},
+    {x: "Unlikely",         y: "Major",          heat: 1, fill: "#ffb74d"},
+    {x: "Unlikely",         y: "Extreme",        heat: 1, fill: "#ffb74d"},
+    {x: "Possible",         y: "Insignificant",  heat: 0, fill: "#90caf9"},
+    {x: "Possible",         y: "Minor",          heat: 0, fill: "#90caf9"},
+    {x: "Possible",         y: "Moderate",       heat: 1, fill: "#ffb74d"},
+    {x: "Possible",         y: "Major",          heat: 1, fill: "#ffb74d"},
+    {x: "Possible",         y: "Extreme",        heat: 1, fill: "#ffb74d"},
+    {x: "Likely",           y: "Insignificant",  heat: 0, fill: "#90caf9"},
+    {x: "Likely",           y: "Minor",          heat: 1, fill: "#ffb74d"},
+    {x: "Likely",           y: "Moderate",       heat: 1, fill: "#ffb74d"},
+    {x: "Likely",           y: "Major",          heat: 2, fill: "#ef6c00"},
+    {x: "Likely",           y: "Extreme",        heat: 2, fill: "#ef6c00"},
+    {x: "Almost\nCertain",  y: "Insignificant",  heat: 0, fill: "#90caf9"},
+    {x: "Almost\nCertain",  y: "Minor",          heat: 1, fill: "#ffb74d"},
+    {x: "Almost\nCertain",  y: "Moderate",       heat: 1, fill: "#ffb74d"},
+    {x: "Almost\nCertain",  y: "Major",          heat: 2, fill: "#ef6c00"},
+    {x: "Almost\nCertain",  y: "Extreme",        heat: 3, fill: "#d84315"}
+  ]);
+
+  // Sets chart settings and hover chart settings
+  chart.stroke('#fff');
+  chart.hoverStroke('6 #fff');
+  chart.hoverFill('#545f69');
+  chart.hoverLabels().fontColor('#fff');
+
+  // Sets selection mode for single selection
+  chart.interactivity().selectionMode("none");
+
+  // Sets title
+  chart.title().enabled(true).text("Risk Matrix in Project Server").padding([0,0,20,0]);
+
+  // Sets adjust chart labels
+  var labels = chart.labels();
+  labels.enabled(true).minFontSize(14);
+  // variable with list of labels
+  var namesList = ["Low", "Medium", "High", "Extreme"];
+  // Formats labels
+  labels.textFormatter(function(){
+    // replace values with words for points heat
+    return namesList[this.heat];
+  });
+
+  // Sets Axes
+  chart.yAxis().stroke(null).labels().padding([0, 15, 0, 0]);
+  chart.yAxis().ticks().enabled(false);
+  chart.xAxis().stroke(null);
+  chart.xAxis().ticks().enabled(false);
+
+  // Sets Tooltip
+  chart.tooltip().title().useHtml(true);
+  chart.tooltip().useHtml(true)
+    .titleFormatter(function() {
+      return '<b>' + namesList[this.heat] + '</b> Residual Risk';
+    })
+    .textFormatter(function() {
+      return '<span style="color: #CECECE">Likelihood: </span>' + this.x + '<br/>' +
+     '<span style="color: #CECECE">Consequence: </span>' + this.y;
+    });
+
+  // Draws Chart
+  chart.container("container");
+  chart.draw();
+});
+        </script>
+    </body>
+</html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Pie Chart</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         
+anychart.onDocumentReady(function() {
+  // create pie chart with passed data
+  chart = anychart.pie([
+    ['Department Stores', 6371664],
+    ['Discount Stores', 7216301],
+    ['Men\'s/Women\'s Stores', 1486621],
+    ['Juvenile Specialty Stores', 786622],
+    ['All other outlets', 900000]
+  ]);
+
+  // set container id for the chart
+  chart.container('container');
+
+  // set chart title text settings
+  chart.title('ACME Corp. apparel sales through different retail channels');
+
+  // set legend title text settings
+  chart.legend(true);
+  chart.legend().title('Retail channels');
+  chart.legend().title().padding([0,0,10,0]);
+
+  // set legend position and items layout
+  chart.legend().position('bottom');
+  chart.legend().itemsLayout('horizontal');
+  chart.legend().align('center');
+
+  // initiate chart drawing
+  chart.draw();
+});
+        </script>
+    </body>
+</html>

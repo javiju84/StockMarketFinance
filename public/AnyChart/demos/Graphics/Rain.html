@@ -1,0 +1,330 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Rain</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         
+var g;
+var rain;
+
+/**
+ * Rain animation class.
+ * @constructor
+ */
+Rain = function() {
+    /**
+     * Drops storage.
+     * @type {Array.<Point3D>}
+     */
+    this.drops = [];
+
+    /**
+     * Ripples storage.
+     * A whole pool of ripples.
+     * @type {Array.<Ripple>}
+     */
+    this.ripples = [];
+
+    /**
+     * Currently active ripples.
+     * @type {Array.<Ripple>}
+     */
+    this.ripplesInUse = [];
+
+    /**
+     * Whether it is allowed to add a new ripple on a screen.
+     * @type {boolean}
+     */
+    this.allowRipples = true;
+
+    this.dropsLayer = stage.layer();
+    this.ripplesLayer = stage.layer();
+
+    for (var i = 0; i < Rain.DROP_COUNT; i++) {
+        var drop = new Point3D(0, 0, -1);
+        drop.stepZ();
+        this.drops.push(drop);
+        this.drops[i].path = this.dropsLayer.path();
+    }
+
+    for (i = 0; i < Rain.RIPPLES_COUNT; i++) {
+        var ripple = new Ripple();
+        this.ripples.push(ripple);
+        this.ripples[i].path = this.ripplesLayer.path();
+    }
+};
+
+/**
+ * Max ripple extension radius.
+ * @type {number}
+ */
+Rain.MAX_RIPPLE_RADIUS = 150;
+
+/**
+ * Extension of ripple per second.
+ * @type {number}
+ */
+Rain.RIPPLE_EXTENSION_STEP = 1;
+
+/**
+ * Max number of ripples on screen.
+ * @type {number}
+ */
+Rain.RIPPLES_COUNT = 20;
+
+/**
+ * Drop step per second.
+ * @type {number}
+ */
+Rain.DROP_STEP = 40;
+
+/**
+ * Focus length.
+ * @type {number}
+ */
+Rain.FOCUS_LENGTH = 50;
+
+/**
+ * FAV multiplier.
+ * @type {number}
+ */
+Rain.FAV = 500;
+
+/**
+ * Pixel length of a single drop.
+ * @type {number}
+ */
+Rain.DROP_LENGTH = 50;
+
+/**
+ * Drops count.
+ * @type {number}
+ */
+Rain.DROP_COUNT = 300;
+
+/**
+ * Z-Depth.
+ * @type {number}
+ */
+Rain.Z_DEPTH = 10000 + Rain.DROP_LENGTH;
+
+
+/**
+ * Complete repaint.
+ */
+Rain.prototype.repaint = function() {
+    stage.suspend();
+
+    for (var i = 0; i < Rain.DROP_COUNT; i++) {
+        var point = this.drops[i];
+        point.stepZ();
+
+        var sX = getScreenCoordinate(point.x, point.z);
+        var sY = getScreenCoordinate(point.y, point.z);
+
+        var eX = getScreenCoordinate(point.x, point.z + Rain.DROP_LENGTH);
+        var eY = getScreenCoordinate(point.y, point.z + Rain.DROP_LENGTH);
+
+        point.path.clear();
+        point.path.moveTo(sX, sY);
+        point.path.lineTo(eX, eY);
+
+        var alpha = Math.max(point.z / Rain.Z_DEPTH, 0);
+        point.path.stroke({color: '#a0a0a0', opacity: 1 - alpha});
+    }
+
+    for (i = this.ripplesInUse.length - 1; i >= 0; i--) {
+        var ripple = this.ripplesInUse[i];
+        if (ripple.step()) {
+            var rippleAlpha = Math.max(1 - (ripple.radius / Rain.MAX_RIPPLE_RADIUS), 0.001);
+
+            ripple.path
+                    .clear()
+                    .moveTo(ripple.x + ripple.radius, ripple.y)
+                    .arcTo(ripple.radius, ripple.radius, 0, 360)
+                    .stroke({color: '#a0a0a0', opacity: rippleAlpha});
+        } else {
+            ripple = this.ripplesInUse.shift();
+            ripple.path.clear();
+            this.ripples.push(ripple);
+        }
+    }
+
+    stage.resume();
+};
+
+/**
+ * Locks adding a new ripple.
+ */
+Rain.prototype.lock = function() {
+    this.allowRipples = false;
+    var ths = this;
+    setTimeout(function() {
+        ths.allowRipples = true;
+    }, 150);
+};
+
+/**
+ * Adds a new ripple.
+ * @param {number} x - X coordinate.
+ * @param {number} y - Y coordinate.
+ */
+Rain.prototype.addRipple = function(x, y) {
+    if (this.allowRipples) {
+        var ripple = this.ripples.pop();
+        if (ripple) {
+            ripple.x = x;
+            ripple.y = y;
+            ripple.radius = 0;
+            ripple.path.clear().stroke({color: '#a0a0a0', opacity: 0});
+            this.ripplesInUse.push(ripple);
+        }
+        this.lock();
+    }
+};
+
+
+//--------------------------------------------------------------------------------------------------------------
+//
+//  Point class.
+//
+//--------------------------------------------------------------------------------------------------------------
+var Point3D = function(x, y, z) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    this.path = null;
+};
+
+
+Point3D.prototype.stepZ = function() {
+    if (this.z < 1) {
+        this.z = randomInt(Math.round(Rain.Z_DEPTH - 0.5 * Rain.Z_DEPTH), Rain.Z_DEPTH);
+        this.x = randomFloat(0, stage.width() + 1000);
+        this.y = randomFloat(0, stage.height() + 1000);
+    }
+    this.z -= Rain.DROP_STEP;
+};
+
+
+//--------------------------------------------------------------------------------------------------------------
+//
+//  Ripple class.
+//
+//--------------------------------------------------------------------------------------------------------------
+
+var Ripple = function(x, y) {
+    this.x = x;
+    this.y = y;
+    this.radius = 0;
+    this.path = null;
+};
+
+
+Ripple.prototype.step = function() {
+    if (this.radius <= Rain.MAX_RIPPLE_RADIUS) {
+        this.radius += Rain.RIPPLE_EXTENSION_STEP;
+        return true;
+    } else {
+        return false;
+    }
+};
+
+
+//--------------------------------------------------------------------------------------------------------------
+//
+//  General.
+//
+//--------------------------------------------------------------------------------------------------------------
+anychart.onDocumentReady(function() {
+    var cont = $('#container');
+    cont.css('background-color', '#000');
+
+    g = anychart.graphics;
+    stage = g.create('container');
+
+    window.requestAnimationFrame = window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            window.oRequestAnimationFrame ||
+            window.msRequestAnimationFrame ||
+            function(callback) {
+                setTimeout(callback, 1000 / 60);
+            };
+
+    rain = new Rain();
+
+    cont.mousemove(function(e) {
+        var x = e.pageX - cont.offset().left;
+        var y = e.pageY - cont.offset().top;
+        rain.addRipple(x, y);
+    });
+
+    draw();
+});
+
+function draw() {
+    window.requestAnimationFrame(draw);
+    rain.repaint();
+}
+
+
+//--------------------------------------------------------------------------------------------------------------
+//
+//  Utils.
+//
+//--------------------------------------------------------------------------------------------------------------
+/**
+ * Gets random float.
+ * @param {number} min - From.
+ * @param {number} max - To.
+ * @returns {number}
+ */
+var randomFloat = function(min, max) {
+    return min + (max - min) * Math.random();
+};
+
+
+/**
+ * Gets random integer.
+ * @param {number} min - From.
+ * @param {number} max - To.
+ * @returns {number}
+ */
+var randomInt = function(min, max) {
+    return Math.round(randomFloat(min, max));
+};
+
+
+/**
+ * Gets screen coordinate.
+ * @param {number} coordinate - Dimension coordinate.
+ * @param {number} z - Depth coordinate.
+ * @return {number}
+ */
+var getScreenCoordinate = function(coordinate, z) {
+    return coordinate * Rain.FAV / (z + Rain.FOCUS_LENGTH);
+};
+    
+        </script>
+    </body>
+</html>

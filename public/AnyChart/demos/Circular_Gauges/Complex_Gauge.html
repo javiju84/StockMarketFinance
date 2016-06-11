@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../../js/anychart.min.js"></script>
+        
+        
+        
+        <link rel="stylesheet" href="../../css/anychart-ui.min.css" />
+        
+        <title>Complex Gauge</title>
+        <style>
+         html, body, #container {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+         
+
+var colorAxisLines = '#CECECE';
+var colorLightMinorAxisLines = '#F7F7F7';
+var colorAxisFont = '#7c868e';
+var darkAccentColor = '#545f69';
+var darkAxisColor = '#B9B9B9';
+var fontColor = '#212121';
+
+anychart.onDocumentReady(function () {
+    stage = anychart.graphics.create('container');
+    var gauge = anychart.circularGauge();
+    gauge.container(stage);
+    gauge
+.bounds('0', '0', '100%', '100%')
+.fill(null)
+.stroke(null)
+.padding(0)
+.margin(0);
+
+    gauge.axis().scale()
+.minimum(0)
+.maximum(220)
+.ticks({interval: 20})
+.minorTicks({interval: 10});
+
+    gauge.axis()
+.startAngle(-130)
+.sweepAngle(260)
+.fill('#474747')
+.zIndex(20)
+.labels();
+
+    gauge.axis().labels()
+.fontWeight('normal')
+.position('i')
+.padding(5)
+.fontColor('#474747')
+.fontSize('16px');
+
+    gauge.data([94]);
+
+    gauge.range(0, {
+from: 160,
+to: 180,
+position: 'i',
+fill: '#D96B2B',
+stroke: '1 #000',
+startSize: 6,
+endSize: 6,
+radius: 113,
+zIndex: 1
+    });
+    gauge.range(1, {
+from: 180,
+to: 220,
+position: 'i',
+fill: '#731728',
+stroke: '1 #000',
+startSize: 6,
+endSize: 6,
+radius: 113,
+zIndex: 1
+    });
+
+    gauge.label()
+.text('<span style="color:' + darkAccentColor + '; font-size: 13px">km/h </span>')
+.useHtml(true);
+
+    gauge.label()
+.hAlign('center')
+.anchor('centerBottom')
+.padding(5, 10)
+.offsetY(70)
+.offsetX(0)
+.zIndex(1)
+.background({fill: 'white', corners: 3, cornerType: 'ROUND'});
+
+    gauge.label(1)
+.text('<span style="color:' + colorAxisFont + '; font-size: 14px">Current speed: 94 </span><br>' +
+'<span style="color:' + darkAccentColor + '; font-size: 13px">Average: 67 </span>').useHtml(true);
+
+    gauge.label(1)
+.hAlign('center')
+.anchor('centerTop')
+.padding(5, 10)
+.offsetY(-20)
+.offsetX(0)
+.zIndex(1)
+.zIndex(1)
+.background({fill: 'white', stroke: '#c1c1c1', corners: 3, cornerType: 'ROUND'});
+
+    gauge.needle()
+.fill(null)
+.stroke('2 ' + darkAccentColor)
+.startRadius('5%')
+.endRadius('80%')
+.startWidth('0.1%')
+.endWidth('0.1%')
+.middleWidth('0.1%');
+
+    gauge.cap()
+.radius('3%')
+.enabled(true)
+.fill(darkAccentColor)
+.stroke(null);
+
+    var internalGauge = anychart.circularGauge();
+    internalGauge.container(stage);
+    
+    internalGauge.background('none');
+
+    internalGauge
+.data([2100])
+.padding(0)
+.fill(null)
+.margin('40%', 0, 0, 0)
+.bounds('25%', '50%', '50%', '50%')
+.stroke('none');
+
+    internalGauge.axis().scale()
+.minimum(0)
+.maximum(9000)
+.ticks().interval(1000);
+
+    internalGauge.axis()
+.startAngle(-90)
+.sweepAngle(180)
+.fill('#474747')
+.zIndex(20)
+.labels();
+
+    internalGauge.axis().labels()
+.fontWeight('normal')
+.position('i')
+.fontFamily('Verdana')
+.fontColor('#474747')
+.fontSize('10px');
+
+    internalGauge.axis().ticks({type: 'trapezium', fill: '#474747', length: 15});
+
+    internalGauge.needle()
+.fill(null)
+.stroke('2 ' + darkAccentColor)
+.startRadius('5%')
+.endRadius('70%')
+.startWidth('0.1%')
+.endWidth('0.1%')
+.middleWidth('0.1%');
+
+    internalGauge.cap()
+.radius('3%')
+.enabled(true)
+.fill(darkAccentColor)
+.stroke(null);
+
+    internalGauge.range(0, {
+from: 7000,
+to: 7500,
+position: 'i',
+fill: '#D96B2B',
+stroke: '1 #000',
+startSize: 8,
+endSize: 8,
+radius: 115,
+zIndex: 1
+    });
+    internalGauge.range(1, {
+from: 7500,
+to: 9000,
+position: 'i',
+fill: '#731728',
+stroke: '1 #000',
+startSize: 8,
+endSize: 8,
+radius: 115,
+zIndex: 1
+    });
+    internalGauge.label(1)
+.text('<span style="color:' + colorAxisFont + '; font-size: 14px">Сurrent engine rpm: 2100 </span><br>' +
+'<span style="color:' + darkAccentColor + '; font-size: 13px">Average rpm: 2236 </span>').useHtml(true);
+    internalGauge.label(1)
+.hAlign('center')
+.anchor('centerTop')
+.padding(5, 10)
+.offsetY(-20)
+.offsetX(0)
+.zIndex(1)
+.zIndex(1)
+.background({fill: 'white', stroke: '#c1c1c1', corners: 3, cornerType: 'ROUND'});
+
+    gauge.draw();
+    internalGauge.draw();
+});
+        </script>
+    </body>
+</html>
