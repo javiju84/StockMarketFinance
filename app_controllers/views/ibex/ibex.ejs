@@ -1,11 +1,444 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Stock Market</title>
+
+   <!-- Included Bootstrap CSS Files -->
+    <link rel="stylesheet" href="../js/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../js/bootstrap/css/bootstrap-responsive.min.css" />
+    
+    <!-- Includes FontAwesome -->
+    <!--
+    <link rel="stylesheet" href="./css/fontawesome/css/font-awesome.css" />
+    -->
+    
+    <!-- Included Bootstrap Customization CSS Files --> 
+    <link rel="stylesheet" href="css/bootstrap-extension.css" />
+    <link rel="stylesheet" href0="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+    
+    <link rel="stylesheet" href="css/carousel-custom-01.css" />
+
+    <link rel="stylesheet" href="../js/touchTouch/assets/touchTouch/touchTouch.css" />
+    
+    <link rel="stylesheet" href="../css/stylesheet.css" />
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-static-top mbottom20">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse" href="#">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="/home">Stock Market</a>
+            <div class="nav-collapse">
+                <ul class="nav pull-left">
+                    <li><a href="./ibex">IBEX-35</a></li>
+                    <li><a href="./europa">EUROPA</a></li>
+                    <li><a href="./eeuu">EEUU</a></li>
+                    <li><a href="./asia">ASIA</a></li>
+                </ul>
+                <ul class="nav pull-right">
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome, <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><i class="icon-cog"></i> Preferences</a></li>
+                            <li><a href="#"><i class="icon-envelope"></i> Contact Support</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/logout"><i class="icon-off"></i> Salir</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+<div class="container">
+    <h1><%=title%></h1>
+    <table  class="table table-striped table-bordered" >
+        <thead>
+            <tr>
+                <th>Valor</th>
+                <th>Apertura</th>
+                <th>Alto</th>
+                <th>Bajo</th>
+                <th>Cierre</th>
+                <th>Volumen</th>
+                <th>Ajust.Cierre</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+           </thead>
+        <tbody>
+            <tr>
+                <td><a href="/home/ibex/abertis">ABERTIS</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="./acciona">ACCIONA</a></td>
+                <td></td>
+               <td></td>
+              <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="./acerinox">ACERINOX</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="./acs">ACS</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="./aena">AENA</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="./amadeus">AMADEUS IT HOLDING</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+               <td></td>
+            </tr>
+            <tr>
+                <td><a href="./arcelormittal">ARCELORMITTAL</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="./bancopopular">BANCO POPULAR</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="./bancosabadell">BANCO SABADELL</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="./bankia">BANKIA</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="./bankinter">BANKINTER</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+          </tr>
+            <tr>
+                <td><a href="./bbva">BBVA</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="./caixabank">CAIXABANK</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="./dia">DIA</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="./enagas">ENAGAS</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+           </tr>
+            <tr>
+                <td><a href="./endesa">ENDESA</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+             </tr>
+             <tr>
+                <td><a href="./fcc">FCC</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                 <td></td>
+            </tr>
+            <tr>
+                <td><a href="./ferrovial">FERROVIAL</a></td>
+               <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                 <td></td>
+             </tr>
+             <tr>
+                <td><a href="./gamesa">GAMESA</a></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+            </tr>
+           <tr>
+                <td><a href="./gasnatural">GAS NATURAL</a></td>
+               <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                 <td></td>
+                <td></td>
+                 <td></td>
+             </tr>
+            <tr>
+                <td><a href="./grifols">GRIFOLS</a></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="./iag">IAG</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+             </tr>
+            <tr>
+                <td><a href="./iberdrola">IBERDROLA</a></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+            </tr>
+            <tr>
+                <td><a href="./inditex">INDITEX</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+           </tr>
+           <tr>
+                <td><a href="./indra">INDRA</a></td>
+                <td></td>
+                <td></td>
+               <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+               <td></td>
+            </tr>
+            <tr>
+                <td><a href="./mafre">MAPFRE</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="./mediaset">MEDIASET</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+               <td></td>
+            </tr>
+            <tr>
+                <td><a href="./merlin">MERLIN PROP.</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="./ohl">OHL</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="./redelectrica">RED ELÉCTRICA</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+           </tr>
+            <tr>
+               <td><a href="./repsol">REPSOL</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="./sacyr">SACYR</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="./santander">SANTANDER</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="./tecnicasreunidas">TECNICAS REUNIDAS</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+             <tr>
+                 <td><a href="./telefonica">TELEFÓNICA</a></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+             </tr>
+            </tbody>
+            </table>
+        </div>
+
+    
+    <script src="../js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="../js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../js/holder.js"></script>
+    <script src="../js/script.js"></script>
+    
+</body>
 </html>

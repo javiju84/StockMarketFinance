@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var home_index = require('./app_controllers/routes/home_index');
 var home_users = require('./app_controllers/routes/home_users');
 
+var ctrlAbertis = require('./app_controllers/controllers/ibex/abertis');
 var app = express();
 
 // view engine setup
